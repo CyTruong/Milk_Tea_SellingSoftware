@@ -14,41 +14,41 @@ public interface iQLTS_Procedure {
 	boolean deleteLoaiDoUong(int maloai);
 	boolean updateLoaiDoUong(int maloai,String tenloai);
 	
-	boolean deleteBanggia(String size,int madouong);
-	boolean insertBanggia(String size,int madouong,int giatien);
+	boolean deleteBanggia(int size,int madouong);
+	boolean insertBanggia(int size,int madouong,int giatien);
 	ResultSet selectBanggia();
-	ResultSet selectBanggia(String size,int madouong);
-	boolean updateLoaiDoUong(String size,int madouong,int giatien);
+	ResultSet selectBanggia(int size,int madouong);
+	boolean updateLoaiDoUong(int size,int madouong,int giatien);
 	
 	boolean deleteChitiethoadon(int macthd);
 	//topping char(256)
-	boolean insertChitiethoadon(int mahoadon,int madouong,String size,String topping);
+	boolean insertChitiethoadon(int mahoadon,int madouong,int size,String topping);
 	ResultSet selectChitiethoadon(int machititethoadon);
 	ResultSet selectChitiethoadon();
-	boolean updateChitiethoadon(int machitiethoadon,int mahoadon,int madouong,String size,String topping);
+	boolean updateChitiethoadon(int machitiethoadon,int mahoadon,int madouong,int size,String topping);
 	
-	boolean insertHoadon(int tongtien,Timestamp thoigianmua,int hinhthucmua,int mathe,int string);
-	ResultSet selectHodon(int mahoadon );
-	ResultSet selectHodon();
-	boolean updateHoadon(int tongtien,Timestamp thoigianmua,int hinhthucmua,int mathe,int string);
+	boolean insertHoadon(int tongtien,Timestamp thoigianmua,int hinhthucmua,int mathe,String magiamgia,int manhanvien,int tiennhan,boolean isdeleted);
+	ResultSet selectHoadon(int mahoadon );
+	ResultSet selectHoadon();
+	boolean updateHoadon(int mahoadon,int tongtien,Timestamp thoigianmua,int hinhthucmua,int mathe,String magiamgia,int manhanvien,int tiennhan,boolean isdeleted);
 	boolean deleteHoadon(int mahoadon);
 	
 	//đổi sdt thành string
 	boolean insertNhanvien(String hoten,String sdt,String username,String password);
 	ResultSet selectNhanvien(int manhanvien);
 	ResultSet selectNhanVien();
-	boolean updateNhanvien(String hoten,String sdt,String username,String password);
+	boolean updateNhanvien(int manhanvien,String hoten,String sdt,String username,String password);
 	boolean deleteNhanvien(int manhanvien);
 	
 	
 	boolean insertTopping(String tentopping,int giatien);
 	ResultSet selectTopping(int matopping);
 	ResultSet selectTopping();
-	boolean updateTopping(String tentopping,int giatien);
+	boolean updateTopping(int matopping,String tentopping,int giatien);
 	boolean deleteTopping(int matopping);
 	
-	boolean insertDouong(String tendouong);
-	boolean updateDouong(String tedouong);
+	boolean insertDouong(String tendouong,int maloaidouong);
+	boolean updateDouong(int madouong,String tedouong,int maloaidouong);
 	boolean deleteDouong(int madouong);
 	ResultSet selectDouong();
 	ResultSet selectDouong(int madouong);
