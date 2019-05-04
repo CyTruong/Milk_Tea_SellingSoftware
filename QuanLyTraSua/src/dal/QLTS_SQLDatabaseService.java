@@ -187,14 +187,15 @@ public class QLTS_SQLDatabaseService extends QLTS_DB implements iQLTS_Procedure 
 	}
 
 	@Override
-	public boolean insertChitiethoadon(int mahoadon, int madouong, int size, String topping) {
+	public boolean insertChitiethoadon(int mahoadon, int madouong, int size, String topping,int giatien) {
 		try {
-			callableStatement = connection.prepareCall("{call CHI_TIET_HOA_DON_INSERTPROCEDURE(?,?,?,?,?)}");
+			callableStatement = connection.prepareCall("{call CHI_TIET_HOA_DON_INSERTPROCEDURE(?,?,?,?,?,?)}");
 			callableStatement.setInt(1, mahoadon);
 			callableStatement.setInt(2, madouong);
 			callableStatement.setInt(3, size);
 			callableStatement.setString(4, topping);
-			callableStatement.setBoolean(5, false);
+			callableStatement.setInt(5, giatien);
+			callableStatement.setBoolean(6, false);
 			callableStatement.executeUpdate();
 			return true;
 		} catch (Exception e) {
@@ -232,16 +233,17 @@ public class QLTS_SQLDatabaseService extends QLTS_DB implements iQLTS_Procedure 
 	}
 
 	@Override
-	public boolean updateChitiethoadon(int machitiethoadon, int mahoadon, int madouong, int size, String topping) {
+	public boolean updateChitiethoadon(int machitiethoadon, int mahoadon, int madouong, int size, String topping,int giatien) {
 		// TODO Auto-generated method stub
 		try {
-			callableStatement = connection.prepareCall("{call CHI_TIET_HOA_DON_UPDATEPROCEDURE(?,?,?,?,?,?)}");
+			callableStatement = connection.prepareCall("{call CHI_TIET_HOA_DON_UPDATEPROCEDURE(?,?,?,?,?,?,?)}");
 			callableStatement.setInt(1, machitiethoadon);
 			callableStatement.setInt(2, mahoadon);
 			callableStatement.setInt(3, madouong);
 			callableStatement.setInt(4, size);
 			callableStatement.setString(5, topping);
-			callableStatement.setBoolean(6, false);
+			callableStatement.setInt(6, giatien);
+			callableStatement.setBoolean(7, false);
 			callableStatement.executeUpdate();
 			return true;
 		} catch (Exception e) {

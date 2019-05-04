@@ -23,10 +23,10 @@ public interface iQLTS_Procedure {
 	
 	boolean deleteChitiethoadon(int macthd);
 	//topping char(256)
-	boolean insertChitiethoadon(int mahoadon,int madouong,int size,String topping);
+	boolean insertChitiethoadon(int mahoadon,int madouong,int size,String topping,int giatien);
 	ResultSet selectChitiethoadon(int machititethoadon);
 	ResultSet selectChitiethoadon();
-	boolean updateChitiethoadon(int machitiethoadon,int mahoadon,int madouong,int size,String topping);
+	boolean updateChitiethoadon(int machitiethoadon,int mahoadon,int madouong,int size,String topping,int giatien);
 	
 	boolean insertHoadon(int tongtien,Timestamp thoigianmua,int hinhthucmua,int mathe,String magiamgia,int manhanvien,int tiennhan,boolean isdeleted);
 	ResultSet selectHoadon(int mahoadon );

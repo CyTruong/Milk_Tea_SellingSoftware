@@ -3,7 +3,7 @@ package dto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoaidouongDto
+public class LoaidouongDto extends baseDto
 {
 	public int maloai;
 	public String tenloai;
@@ -16,21 +16,22 @@ public class LoaidouongDto
 	public LoaidouongDto(LoaidouongDto dto) {
 		this.maloai = dto.maloai;
 		this.tenloai = dto.tenloai;
+		this.isdeleted = dto.isdeleted;
 	}
 	
-	public LoaidouongDto(ResultSet sqlResult) {
-		try {
-			this.maloai = sqlResult.getInt(1);
-			this.tenloai = sqlResult.getString(2);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return super.toString();
+	}
+
+	@Override
+	public void mapping(ResultSet sqlResult) throws SQLException {
+			this.maloai = sqlResult.getInt(1);
+			this.tenloai = sqlResult.getString(2);
+			this.isdeleted = sqlResult.getBoolean(3);
+		
+
 	}
 
 }
