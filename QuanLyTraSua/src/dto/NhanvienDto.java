@@ -19,10 +19,10 @@ public class NhanvienDto extends baseDto {
 	public void mapping(ResultSet sqlResult) throws SQLException {
 		// TODO Auto-generated method stu
 		this.manhanvien = sqlResult.getInt(1);
-		this.hoten = sqlResult.getString(2);
-		this.sdt = sqlResult.getString(3);
-		this.username = sqlResult.getString(4);
-		this.password = sqlResult.getString(5);
+		this.hoten = sqlResult.getString(2).replaceAll("  ", "");;
+		this.sdt = sqlResult.getString(3).replaceAll("  ", "");
+		this.username = sqlResult.getString(4).replaceAll(" ", "");
+		this.password = sqlResult.getString(5).replaceAll(" ", "");
 		this.isdeleted = sqlResult.getBoolean(6);
 		
 	}

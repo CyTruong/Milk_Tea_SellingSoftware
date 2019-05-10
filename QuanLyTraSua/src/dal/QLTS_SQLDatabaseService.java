@@ -8,13 +8,29 @@ import java.time.LocalDateTime;
 
 public class QLTS_SQLDatabaseService extends QLTS_DB implements iQLTS_Procedure {
 
-	private String connectionString ;
-	private iErrorReport iErrorReport;
-	private CallableStatement callableStatement;
+	private static QLTS_SQLDatabaseService _instance;
+	private static String DB_URL = "jdbc:sqlserver://localhost:1433;"
+            + "databaseName=QUANLITRASUA;"
+            + "integratedSecurity=true";
 	
-	public QLTS_SQLDatabaseService(String _connectionString) {
-		this.connectionString = _connectionString;
-		// TODO Auto-generated constructor stub
+	private iErrorReport iErrorReport;
+	private static CallableStatement callableStatement;
+	
+	private static String connectionString = DB_URL ;
+	public static QLTS_SQLDatabaseService getInstance() {
+		if(_instance==null) {
+			_instance = new QLTS_SQLDatabaseService();
+		}
+		return _instance;
+	}
+	
+	public QLTS_SQLDatabaseService() {
+		CreatConnection();
+	}
+	
+	public static void setConncectionString(String _connectionString) {
+		connectionString = _connectionString;
+
 	}
 	
 	public void setErrorReportListener(iErrorReport _ireport ) {
@@ -334,14 +350,15 @@ public class QLTS_SQLDatabaseService extends QLTS_DB implements iQLTS_Procedure 
 	}
 	
 	@Override
-	public boolean insertNhanvien(String hoten, String sdt, String username, String password) {
+	public boolean insertNhanvien(String hoten, String sdt, String username, String password,int quyenhan) {
 		try {
-			callableStatement = connection.prepareCall("{call NHAN_VIEN_INSERTPROCEDURE(?,?,?,?,?)}");
+			callableStatement = connection.prepareCall("{call NHAN_VIEN_INSERTPROCEDURE(?,?,?,?,?,?)}");
 			callableStatement.setString(1, hoten);
 			callableStatement.setString(2, sdt);
 			callableStatement.setString(3, username);
 			callableStatement.setString(4, password);
-			callableStatement.setBoolean(5, false);
+			callableStatement.setInt(5, quyenhan);
+			callableStatement.setBoolean(6, false);
 			callableStatement.executeUpdate();
 			return true;
 		} catch (Exception e) {
@@ -380,16 +397,17 @@ public class QLTS_SQLDatabaseService extends QLTS_DB implements iQLTS_Procedure 
 	}
 
 	@Override
-	public boolean updateNhanvien(int manhanvien,String hoten, String sdt, String username, String password) {
+	public boolean updateNhanvien(int manhanvien,String hoten, String sdt, String username, String password,int quyenhan) {
 		// TODO Auto-generated method stub
 		try {
-			callableStatement = connection.prepareCall("{call NHAN_VIEN_UPDATEPROCEDURE(?,?,?,?,?,?)}");
+			callableStatement = connection.prepareCall("{call NHAN_VIEN_UPDATEPROCEDURE(?,?,?,?,?,?,?)}");
 			callableStatement.setInt(1, manhanvien);
 			callableStatement.setString(2, hoten);
 			callableStatement.setString(3, sdt);
 			callableStatement.setString(4, username);
 			callableStatement.setString(5, password);
-			callableStatement.setBoolean(6, false);
+			callableStatement.setInt(6, quyenhan);
+			callableStatement.setBoolean(7, false);
 			callableStatement.executeUpdate();
 			return true;
 		} catch (Exception e) {

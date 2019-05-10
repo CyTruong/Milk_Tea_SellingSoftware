@@ -35,10 +35,10 @@ public interface iQLTS_Procedure {
 	boolean deleteHoadon(int mahoadon);
 	
 	//đổi sdt thành string
-	boolean insertNhanvien(String hoten,String sdt,String username,String password);
+	boolean insertNhanvien(String hoten,String sdt,String username,String password,int quyenhan);
 	ResultSet selectNhanvien(int manhanvien);
 	ResultSet selectNhanVien();
-	boolean updateNhanvien(int manhanvien,String hoten,String sdt,String username,String password);
+	boolean updateNhanvien(int manhanvien,String hoten,String sdt,String username,String password,int quyenhan);
 	boolean deleteNhanvien(int manhanvien);
 	
 	

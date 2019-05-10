@@ -2,6 +2,7 @@ package test;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import bus.Permission;
 import dal.*;
 
 public class test {
@@ -9,19 +10,19 @@ public class test {
             + "databaseName=QUANLITRASUA;"
             + "integratedSecurity=true";
 	public static void main(String[] args) {
-		QLTS_SQLDatabaseService qlts = new QLTS_SQLDatabaseService(DB_URL);
-		qlts.setErrorReportListener(new iErrorReport() {
+		QLTS_SQLDatabaseService.setConncectionString(DB_URL);
+		QLTS_SQLDatabaseService.getInstance().setErrorReportListener(new iErrorReport() {
 			
 			@Override
 			public void weHaveError(String errmess) {
 				System.out.println("Lỗi "+ errmess);
 			}
 		});
-		qlts.CreatConnection();
+		QLTS_SQLDatabaseService.getInstance().CreatConnection();
 		System.out.println("connect ok");
 		//qlts.insertLoaiDoUong("Trà");
-		qlts.insertNhanvien("Phạm Nhật Trường", "0563683819", "cylasion", "012121");
-		ResultSet rs = qlts.selectLoaiDoUong();
+		QLTS_SQLDatabaseService.getInstance().insertNhanvien("Phạm Nhật Trường", "0563683819", "cylasion", "012121",Permission.FULL_PER);
+		ResultSet rs = QLTS_SQLDatabaseService.getInstance().selectLoaiDoUong();
 		try {
 			while(rs.next()) 
 			{
