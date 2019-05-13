@@ -25,6 +25,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PickTableFrame extends JFrame {
 
@@ -72,14 +74,23 @@ public class PickTableFrame extends JFrame {
 		getContentPane().add(center_panel, BorderLayout.CENTER);
 		GridBagLayout gbl_center_panel = new GridBagLayout();
 		int h = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 5);
-		//w = 45;
- 		gbl_center_panel.columnWidths = new int[]{h/2, h, h, h, h, h, 0};
+ 		gbl_center_panel.columnWidths = new int[]{h/2, h, h, h, h, h, h, 0};
 		gbl_center_panel.rowHeights = new int[]{h/2, h, h, h, h, 0};
-		gbl_center_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_center_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_center_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		center_panel.setLayout(gbl_center_panel);
 		
+		ActionListener Pickaction = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				e.getActionCommand();
+				System.out.println("Action");
+			}
+		};
+		
 		JButton btHere = new JButton("Mang \u0111i");
+		btHere.addActionListener(Pickaction);
 		btHere.setMargin(new Insets(0, 0, 0, 0));
 		btHere.setMinimumSize(new Dimension(50, 50));
 		btHere.setMaximumSize(new Dimension(70, 70));
@@ -117,10 +128,18 @@ public class PickTableFrame extends JFrame {
 		JButton bt4 = new JButton("4");
 		GridBagConstraints gbc_bt4 = new GridBagConstraints();
 		gbc_bt4.fill = GridBagConstraints.BOTH;
-		gbc_bt4.insets = new Insets(0, 0, 5, 0);
+		gbc_bt4.insets = new Insets(0, 0, 5, 5);
 		gbc_bt4.gridx = 5;
 		gbc_bt4.gridy = 1;
 		center_panel.add(bt4, gbc_bt4);
+		
+		JButton btUp = new JButton("UP");
+		GridBagConstraints gbc_btUp = new GridBagConstraints();
+		gbc_btUp.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btUp.insets = new Insets(0, 0, 5, 0);
+		gbc_btUp.gridx = 6;
+		gbc_btUp.gridy = 1;
+		center_panel.add(btUp, gbc_btUp);
 		
 		JButton bt5 = new JButton("5");
 		GridBagConstraints gbc_bt5 = new GridBagConstraints();
@@ -157,10 +176,19 @@ public class PickTableFrame extends JFrame {
 		JButton bt9 = new JButton("9");
 		GridBagConstraints gbc_bt9 = new GridBagConstraints();
 		gbc_bt9.fill = GridBagConstraints.BOTH;
-		gbc_bt9.insets = new Insets(0, 0, 5, 0);
+		gbc_bt9.insets = new Insets(0, 0, 5, 5);
 		gbc_bt9.gridx = 5;
 		gbc_bt9.gridy = 2;
 		center_panel.add(bt9, gbc_bt9);
+		
+		JList itemList = new JList();
+		GridBagConstraints gbc_itemList = new GridBagConstraints();
+		gbc_itemList.gridheight = 2;
+		gbc_itemList.insets = new Insets(0, 0, 5, 0);
+		gbc_itemList.gridx = 6;
+		gbc_itemList.gridy = 2;
+		center_panel.add(itemList, gbc_itemList);
+		itemList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		
 		JButton bt10 = new JButton("10");
 		GridBagConstraints gbc_bt10 = new GridBagConstraints();
@@ -196,7 +224,7 @@ public class PickTableFrame extends JFrame {
 		
 		JButton bt14 = new JButton("14");
 		GridBagConstraints gbc_bt14 = new GridBagConstraints();
-		gbc_bt14.insets = new Insets(0, 0, 5, 0);
+		gbc_bt14.insets = new Insets(0, 0, 5, 5);
 		gbc_bt14.fill = GridBagConstraints.BOTH;
 		gbc_bt14.gridx = 5;
 		gbc_bt14.gridy = 3;
@@ -236,24 +264,44 @@ public class PickTableFrame extends JFrame {
 		
 		JButton bt20 = new JButton("20");
 		GridBagConstraints gbc_bt20 = new GridBagConstraints();
+		gbc_bt20.insets = new Insets(0, 0, 0, 5);
 		gbc_bt20.fill = GridBagConstraints.BOTH;
 		gbc_bt20.gridx = 5;
 		gbc_bt20.gridy = 4;
 		center_panel.add(bt20, gbc_bt20);
 		
-		JPanel right_panel = new JPanel();
-		getContentPane().add(right_panel, BorderLayout.EAST);
-		right_panel.setLayout(new BorderLayout(0, 0));
-		
-		JButton btUp = new JButton("UP");
-		right_panel.add(btUp, BorderLayout.NORTH);
-		
 		JButton btDown = new JButton("DOWN");
-		right_panel.add(btDown, BorderLayout.SOUTH);
+		GridBagConstraints gbc_btDown = new GridBagConstraints();
+		gbc_btDown.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btDown.gridx = 6;
+		gbc_btDown.gridy = 4;
+		center_panel.add(btDown, gbc_btDown);
 		
-		JList itemList = new JList();
-		itemList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		right_panel.add(itemList, BorderLayout.CENTER);
+		JPanel right_panel = new JPanel();
+		int rightPanelWidth = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/5;
+		right_panel.setPreferredSize(new Dimension(rightPanelWidth , getContentPane().getPreferredSize().height));
+		getContentPane().add(right_panel, BorderLayout.EAST);
+		GridBagLayout gbl_right_panel = new GridBagLayout();
+		gbl_right_panel.columnWidths = new int[]{rightPanelWidth, 0};
+		gbl_right_panel.rowHeights = new int[]{rightPanelWidth, rightPanelWidth, 0};
+		gbl_right_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_right_panel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		right_panel.setLayout(gbl_right_panel);
+		
+		JButton btDatmon = new JButton("\u0110\u1EB7t m\u00F3n");
+		GridBagConstraints gbc_btDatmon = new GridBagConstraints();
+		gbc_btDatmon.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btDatmon.insets = new Insets(0, 0, 5, 0);
+		gbc_btDatmon.gridx = 0;
+		gbc_btDatmon.gridy = 0;
+		right_panel.add(btDatmon, gbc_btDatmon);
+		
+		JButton btThanhtoan = new JButton("Thanh to\u00E1n");
+		GridBagConstraints gbc_btThanhtoan = new GridBagConstraints();
+		gbc_btThanhtoan.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btThanhtoan.gridx = 0;
+		gbc_btThanhtoan.gridy = 1;
+		right_panel.add(btThanhtoan, gbc_btThanhtoan);
 		
 		JPanel bot_panel = new JPanel();
 		getContentPane().add(bot_panel, BorderLayout.SOUTH);
