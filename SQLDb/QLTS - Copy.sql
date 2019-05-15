@@ -484,6 +484,7 @@ create table NHAN_VIEN (
    SDT                  char(256)            not null,
    USENAME              char(256)            not null,
    PASSWORD             char(256)            not null,
+   QUYEN_HAN			INT					NOT NULL,
    ISDELETED            bit                  null,
    constraint PK_NHAN_VIEN primary key nonclustered (MA_NHAN_VIEN)
 )
@@ -649,10 +650,10 @@ where NHAN_VIEN.MA_NHAN_VIEN = @MA_NHAN_VIEN
 end
 go
 
-create procedure NHAN_VIEN_INSERTPROCEDURE  @HO_TEN char(256),@SDT char(256),@USENAME char(256),@PASSWORD char(256),@ISDELETED bit as
+create procedure NHAN_VIEN_INSERTPROCEDURE  @HO_TEN char(256),@SDT char(256),@USENAME char(256),@PASSWORD char(256),@QUYENHAN INT,@ISDELETED bit as
 begin
-insert into NHAN_VIEN (NHAN_VIEN.HO_TEN,NHAN_VIEN.SDT,NHAN_VIEN.USENAME,NHAN_VIEN.PASSWORD,NHAN_VIEN.ISDELETED)
-values(@HO_TEN,@SDT,@USENAME,@PASSWORD,@ISDELETED)
+insert into NHAN_VIEN (NHAN_VIEN.HO_TEN,NHAN_VIEN.SDT,NHAN_VIEN.USENAME,NHAN_VIEN.PASSWORD,dbo.NHAN_VIEN.QUYEN_HAN,NHAN_VIEN.ISDELETED)
+values(@HO_TEN,@SDT,@USENAME,@PASSWORD,@QUYENHAN,@ISDELETED)
 end
 go
 
@@ -663,10 +664,10 @@ where NHAN_VIEN.MA_NHAN_VIEN = @MA_NHAN_VIEN
 end
 go
 
-create procedure NHAN_VIEN_UPDATEPROCEDURE  @MA_NHAN_VIEN int,@HO_TEN char(256),@SDT char(256),@USENAME char(256),@PASSWORD char(256),@ISDELETED bit as
+create procedure NHAN_VIEN_UPDATEPROCEDURE  @MA_NHAN_VIEN int,@HO_TEN char(256),@SDT char(256),@USENAME char(256),@PASSWORD char(256),@QUYENHAN INT,@ISDELETED bit as
 begin
 update NHAN_VIEN
-set NHAN_VIEN.HO_TEN = @HO_TEN, NHAN_VIEN.SDT = @SDT, NHAN_VIEN.USENAME = @USENAME, NHAN_VIEN.PASSWORD = @PASSWORD, NHAN_VIEN.ISDELETED = @ISDELETED
+set NHAN_VIEN.HO_TEN = @HO_TEN, NHAN_VIEN.SDT = @SDT, NHAN_VIEN.USENAME = @USENAME, NHAN_VIEN.PASSWORD = @PASSWORD, dbo.NHAN_VIEN.QUYEN_HAN= @QUYENHAN ,NHAN_VIEN.ISDELETED = @ISDELETED
 where (NHAN_VIEN.MA_NHAN_VIEN = @MA_NHAN_VIEN)
 end
 go
@@ -714,20 +715,20 @@ values(@TEN_DO_UONG,@MA_LOAI_DO_UONG,@ISDELETED)
 end
 go
 
-create procedure _O_UONG_SELECTPROCEDURE  @MA_DO_UONG int as
-begin
-select * from DO_UONG
-where DO_UONG.MA_DO_UONG = @MA_DO_UONG
-end
-go
+CREATE PROCEDURE _O_UONG_SELECTPROCEDURE  @MA_DO_UONG INT AS
+BEGIN
+SELECT * FROM DO_UONG
+WHERE DO_UONG.MA_DO_UONG = @MA_DO_UONG
+END
+GO
 
-create procedure _O_UONG_UPDATEPROCEDURE  @MA_DO_UONG int,@TEN_DO_UONG char(256),@MA_LOAI_DO_UONG int,@ISDELETED bit as
-begin
-update DO_UONG
-set DO_UONG.TEN_DO_UONG = @TEN_DO_UONG, DO_UONG.MA_LOAI_DO_UONG = @MA_LOAI_DO_UONG, DO_UONG.ISDELETED = @ISDELETED
-where (DO_UONG.MA_DO_UONG = @MA_DO_UONG)
-end
-go
+CREATE PROCEDURE _O_UONG_UPDATEPROCEDURE  @MA_DO_UONG INT,@TEN_DO_UONG CHAR(256),@MA_LOAI_DO_UONG INT,@ISDELETED BIT AS
+BEGIN
+UPDATE DO_UONG
+SET DO_UONG.TEN_DO_UONG = @TEN_DO_UONG, DO_UONG.MA_LOAI_DO_UONG = @MA_LOAI_DO_UONG, DO_UONG.ISDELETED = @ISDELETED
+WHERE (DO_UONG.MA_DO_UONG = @MA_DO_UONG)
+END
+GO
 
 
 /*
@@ -748,3 +749,111 @@ VALUES
 (   'Kem' -- LOAI_DO_UONG - char(256)
     )
 	*/
+
+	INSERT dbo.NHAN_VIEN
+	(
+	    HO_TEN,
+	    SDT,
+	    USENAME,
+	    PASSWORD,
+	    QUYEN_HAN,
+	    ISDELETED
+	)
+	VALUES
+	(   'Pham Nhat Truong',  -- HO_TEN - char(256)
+	    '0563683819',  -- SDT - char(256)
+	    'cy',  -- USENAME - char(256)
+	    '1',  -- PASSWORD - char(256)
+	    10000,   -- QUYEN_HAN - int
+	    NULL -- ISDELETED - bit
+	    )
+
+		INSERT dbo.HOA_DON
+		(
+		    TONG_TIEN,
+		    THOI_GIAN,
+		    HINH_THUC_MUA,
+		    MA_THE,
+		    MA_GIAM_GIA,
+		    MA_NHAN_VIEN,
+		    TIENNHAN,
+		    ISDELETED
+		)
+		VALUES
+		(   200000,      -- TONG_TIEN - money
+		    GETDATE(), -- THOI_GIAN - datetime
+		    0,         -- HINH_THUC_MUA - int
+		    0,         -- MA_THE - int
+		    'eo co',        -- MA_GIAM_GIA - char(256)
+		    2,         -- MA_NHAN_VIEN - int
+		    200000,         -- TIENNHAN - int
+		    0       -- ISDELETED - bit
+		    )
+
+	INSERT dbo.HOA_DON
+		(
+		    TONG_TIEN,
+		    THOI_GIAN,
+		    HINH_THUC_MUA,
+		    MA_THE,
+		    MA_GIAM_GIA,
+		    MA_NHAN_VIEN,
+		    TIENNHAN,
+		    ISDELETED
+		)
+		VALUES
+		(   200000,      -- TONG_TIEN - money
+		    GETDATE(), -- THOI_GIAN - datetime
+		    0,         -- HINH_THUC_MUA - int
+		    1,         -- MA_THE - int
+		    'eo co',        -- MA_GIAM_GIA - char(256)
+		    2,         -- MA_NHAN_VIEN - int
+		    200000,         -- TIENNHAN - int
+		    0       -- ISDELETED - bit
+		    )
+
+	INSERT dbo.HOA_DON
+		(
+		    TONG_TIEN,
+		    THOI_GIAN,
+		    HINH_THUC_MUA,
+		    MA_THE,
+		    MA_GIAM_GIA,
+		    MA_NHAN_VIEN,
+		    TIENNHAN,
+		    ISDELETED
+		)
+		VALUES
+		(   0,      -- TONG_TIEN - money
+		    GETDATE(), -- THOI_GIAN - datetime
+		    1,         -- HINH_THUC_MUA - int
+		    1,         -- MA_THE - int
+		    'eo co',        -- MA_GIAM_GIA - char(256)
+		    2,         -- MA_NHAN_VIEN - int
+		    0,         -- TIENNHAN - int
+		    0       -- ISDELETED - bit
+		    )
+
+	INSERT dbo.HOA_DON
+		(
+		    TONG_TIEN,
+		    THOI_GIAN,
+		    HINH_THUC_MUA,
+		    MA_THE,
+		    MA_GIAM_GIA,
+		    MA_NHAN_VIEN,
+		    TIENNHAN,
+		    ISDELETED
+		)
+		VALUES
+		(   0,      -- TONG_TIEN - money
+		    GETDATE(), -- THOI_GIAN - datetime
+		    1,         -- HINH_THUC_MUA - int
+		    5,         -- MA_THE - int
+		    'eo co',        -- MA_GIAM_GIA - char(256)
+		    2,         -- MA_NHAN_VIEN - int
+		    0,         -- TIENNHAN - int
+		    0       -- ISDELETED - bit
+		    )
+
+		

@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import bus.LoginBus;
 import bus.LoginBus.Login_result;
+import bus.PickTableBus;
 import mdlaf.MaterialLookAndFeel;
 
 import javax.swing.JTextField;
@@ -115,6 +116,10 @@ public class loginFrame extends JFrame {
 		tfPass.setBounds(131, 136, 143, 20);
 		contentPane.add(tfPass);
 		
+		loadDrinkingTableContent();
+	}
 	
+	private void loadDrinkingTableContent() {
+		PickTableBus.getInstance();
 	}
 }

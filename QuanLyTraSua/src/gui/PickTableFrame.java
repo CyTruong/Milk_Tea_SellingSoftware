@@ -6,12 +6,18 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import bus.PickTableBus;
+import dto.HoadonDto;
+import mdlaf.MaterialLookAndFeel;
+
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Frame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.GridLayout;
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -24,14 +30,22 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 import java.awt.event.ActionEvent;
 
-public class PickTableFrame extends JFrame {
+public class PickTableFrame extends JFrame implements ActionListener  {
 
 	private JPanel contentPane;
-
+	private ArrayList<JButton> arrTableButton = new ArrayList<>();
+	private JButton selectedTable = null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -54,6 +68,12 @@ public class PickTableFrame extends JFrame {
 	public PickTableFrame() {
 		setUndecorated(true);
 		setResizable(false);
+		try {
+			UIManager.setLookAndFeel(new MaterialLookAndFeel ());
+		} catch (UnsupportedLookAndFeelException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -80,26 +100,15 @@ public class PickTableFrame extends JFrame {
 		gbl_center_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		center_panel.setLayout(gbl_center_panel);
 		
-		ActionListener Pickaction = new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				e.getActionCommand();
-				System.out.println("Action");
-			}
-		};
-		
+	
 		JButton btHere = new JButton("Mang \u0111i");
-		btHere.addActionListener(Pickaction);
-		btHere.setMargin(new Insets(0, 0, 0, 0));
-		btHere.setMinimumSize(new Dimension(50, 50));
-		btHere.setMaximumSize(new Dimension(70, 70));
 		GridBagConstraints gbc_btHere = new GridBagConstraints();
 		gbc_btHere.fill = GridBagConstraints.BOTH;
 		gbc_btHere.insets = new Insets(0, 0, 5, 5);
 		gbc_btHere.gridx = 1;
 		gbc_btHere.gridy = 1;
 		center_panel.add(btHere, gbc_btHere);
+		arrTableButton.add(btHere);
 		
 		JButton bt1 = new JButton("1");
 		GridBagConstraints gbc_bt1 = new GridBagConstraints();
@@ -108,6 +117,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt1.gridx = 2;
 		gbc_bt1.gridy = 1;
 		center_panel.add(bt1, gbc_bt1);
+		arrTableButton.add(bt1);
 		
 		JButton bt2 = new JButton("2");
 		GridBagConstraints gbc_bt2 = new GridBagConstraints();
@@ -116,6 +126,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt2.gridx = 3;
 		gbc_bt2.gridy = 1;
 		center_panel.add(bt2, gbc_bt2);
+		arrTableButton.add(bt2);
 		
 		JButton bt3 = new JButton("3");
 		GridBagConstraints gbc_bt3 = new GridBagConstraints();
@@ -124,6 +135,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt3.gridx = 4;
 		gbc_bt3.gridy = 1;
 		center_panel.add(bt3, gbc_bt3);
+		arrTableButton.add(bt3);
 		
 		JButton bt4 = new JButton("4");
 		GridBagConstraints gbc_bt4 = new GridBagConstraints();
@@ -132,7 +144,9 @@ public class PickTableFrame extends JFrame {
 		gbc_bt4.gridx = 5;
 		gbc_bt4.gridy = 1;
 		center_panel.add(bt4, gbc_bt4);
+		arrTableButton.add(bt4);
 		
+		///////////////////////////////////
 		JButton btUp = new JButton("UP");
 		GridBagConstraints gbc_btUp = new GridBagConstraints();
 		gbc_btUp.fill = GridBagConstraints.HORIZONTAL;
@@ -148,6 +162,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt5.gridx = 1;
 		gbc_bt5.gridy = 2;
 		center_panel.add(bt5, gbc_bt5);
+		arrTableButton.add(bt5);
 		
 		JButton bt6 = new JButton("6");
 		GridBagConstraints gbc_bt6 = new GridBagConstraints();
@@ -156,6 +171,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt6.gridx = 2;
 		gbc_bt6.gridy = 2;
 		center_panel.add(bt6, gbc_bt6);
+		arrTableButton.add(bt6);
 		
 		JButton bt7 = new JButton("7");
 		GridBagConstraints gbc_bt7 = new GridBagConstraints();
@@ -164,6 +180,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt7.gridx = 3;
 		gbc_bt7.gridy = 2;
 		center_panel.add(bt7, gbc_bt7);
+		arrTableButton.add(bt7);
 		
 		JButton bt8 = new JButton("8");
 		GridBagConstraints gbc_bt8 = new GridBagConstraints();
@@ -172,6 +189,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt8.gridx = 4;
 		gbc_bt8.gridy = 2;
 		center_panel.add(bt8, gbc_bt8);
+		arrTableButton.add(bt8);
 		
 		JButton bt9 = new JButton("9");
 		GridBagConstraints gbc_bt9 = new GridBagConstraints();
@@ -180,6 +198,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt9.gridx = 5;
 		gbc_bt9.gridy = 2;
 		center_panel.add(bt9, gbc_bt9);
+		arrTableButton.add(bt9);
 		
 		JList itemList = new JList();
 		GridBagConstraints gbc_itemList = new GridBagConstraints();
@@ -197,6 +216,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt10.gridx = 1;
 		gbc_bt10.gridy = 3;
 		center_panel.add(bt10, gbc_bt10);
+		arrTableButton.add(bt10);
 		
 		JButton bt11 = new JButton("11");
 		GridBagConstraints gbc_bt11 = new GridBagConstraints();
@@ -205,6 +225,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt11.gridx = 2;
 		gbc_bt11.gridy = 3;
 		center_panel.add(bt11, gbc_bt11);
+		arrTableButton.add(bt11);
 		
 		JButton bt12 = new JButton("12");
 		GridBagConstraints gbc_bt12 = new GridBagConstraints();
@@ -213,6 +234,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt12.gridx = 3;
 		gbc_bt12.gridy = 3;
 		center_panel.add(bt12, gbc_bt12);
+		arrTableButton.add(bt12);
 		
 		JButton bt13 = new JButton("13");
 		GridBagConstraints gbc_bt13 = new GridBagConstraints();
@@ -221,6 +243,7 @@ public class PickTableFrame extends JFrame {
 		gbc_bt13.gridx = 4;
 		gbc_bt13.gridy = 3;
 		center_panel.add(bt13, gbc_bt13);
+		arrTableButton.add(bt13);
 		
 		JButton bt14 = new JButton("14");
 		GridBagConstraints gbc_bt14 = new GridBagConstraints();
@@ -229,46 +252,54 @@ public class PickTableFrame extends JFrame {
 		gbc_bt14.gridx = 5;
 		gbc_bt14.gridy = 3;
 		center_panel.add(bt14, gbc_bt14);
+		arrTableButton.add(bt14);
+		
+		JButton bt15 = new JButton("15");
+		GridBagConstraints gbc_bt15 = new GridBagConstraints();
+		gbc_bt15.fill = GridBagConstraints.BOTH;
+		gbc_bt15.insets = new Insets(0, 0, 0, 5);
+		gbc_bt15.gridx = 1;
+		gbc_bt15.gridy = 4;
+		center_panel.add(bt15, gbc_bt15);
+		arrTableButton.add(bt15);
 		
 		JButton bt16 = new JButton("16");
 		GridBagConstraints gbc_bt16 = new GridBagConstraints();
 		gbc_bt16.fill = GridBagConstraints.BOTH;
 		gbc_bt16.insets = new Insets(0, 0, 0, 5);
-		gbc_bt16.gridx = 1;
+		gbc_bt16.gridx = 2;
 		gbc_bt16.gridy = 4;
 		center_panel.add(bt16, gbc_bt16);
+		arrTableButton.add(bt16);
 		
 		JButton bt17 = new JButton("17");
 		GridBagConstraints gbc_bt17 = new GridBagConstraints();
 		gbc_bt17.fill = GridBagConstraints.BOTH;
 		gbc_bt17.insets = new Insets(0, 0, 0, 5);
-		gbc_bt17.gridx = 2;
+		gbc_bt17.gridx = 3;
 		gbc_bt17.gridy = 4;
 		center_panel.add(bt17, gbc_bt17);
+		arrTableButton.add(bt17);
 		
-		JButton bt18 = new JButton("18");
+		JButton bt18 = new JButton("19");
 		GridBagConstraints gbc_bt18 = new GridBagConstraints();
 		gbc_bt18.fill = GridBagConstraints.BOTH;
 		gbc_bt18.insets = new Insets(0, 0, 0, 5);
-		gbc_bt18.gridx = 3;
+		gbc_bt18.gridx = 4;
 		gbc_bt18.gridy = 4;
 		center_panel.add(bt18, gbc_bt18);
+		arrTableButton.add(bt18);
 		
 		JButton bt19 = new JButton("19");
 		GridBagConstraints gbc_bt19 = new GridBagConstraints();
-		gbc_bt19.fill = GridBagConstraints.BOTH;
 		gbc_bt19.insets = new Insets(0, 0, 0, 5);
-		gbc_bt19.gridx = 4;
+		gbc_bt19.fill = GridBagConstraints.BOTH;
+		gbc_bt19.gridx = 5;
 		gbc_bt19.gridy = 4;
 		center_panel.add(bt19, gbc_bt19);
+		arrTableButton.add(bt19);
 		
-		JButton bt20 = new JButton("20");
-		GridBagConstraints gbc_bt20 = new GridBagConstraints();
-		gbc_bt20.insets = new Insets(0, 0, 0, 5);
-		gbc_bt20.fill = GridBagConstraints.BOTH;
-		gbc_bt20.gridx = 5;
-		gbc_bt20.gridy = 4;
-		center_panel.add(bt20, gbc_bt20);
+		setListener();
 		
 		JButton btDown = new JButton("DOWN");
 		GridBagConstraints gbc_btDown = new GridBagConstraints();
@@ -290,7 +321,7 @@ public class PickTableFrame extends JFrame {
 		
 		JButton btDatmon = new JButton("\u0110\u1EB7t m\u00F3n");
 		GridBagConstraints gbc_btDatmon = new GridBagConstraints();
-		gbc_btDatmon.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btDatmon.fill = GridBagConstraints.BOTH;
 		gbc_btDatmon.insets = new Insets(0, 0, 5, 0);
 		gbc_btDatmon.gridx = 0;
 		gbc_btDatmon.gridy = 0;
@@ -298,7 +329,7 @@ public class PickTableFrame extends JFrame {
 		
 		JButton btThanhtoan = new JButton("Thanh to\u00E1n");
 		GridBagConstraints gbc_btThanhtoan = new GridBagConstraints();
-		gbc_btThanhtoan.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btThanhtoan.fill = GridBagConstraints.BOTH;
 		gbc_btThanhtoan.gridx = 0;
 		gbc_btThanhtoan.gridy = 1;
 		right_panel.add(btThanhtoan, gbc_btThanhtoan);
@@ -309,6 +340,48 @@ public class PickTableFrame extends JFrame {
 		JLabel lblNewLabel = new JLabel("New label");
 		bot_panel.add(lblNewLabel);
 		
+		setCurrentDrinkingTable();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		JButton bt = (JButton)arg0.getSource();
+			selectedTable = bt;
+			setSelectedtable();
+			System.out.println(selectedTable.getText());
+			this.revalidate();
+		
+	}
+	
+	private void setSelectedtable() {
+		if(selectedTable!=null) {
+			setDefautColor();
+			selectedTable.setBackground(new Color(160, 204, 238));
+		}
+	}
+	
+	private void setListener() {
+		for (JButton jButton : arrTableButton) {
+			jButton.addActionListener(this);
+		}
+	}
+	
+	private void setDefautColor() {
+		for (JButton jButton : arrTableButton) {
+			jButton.setBackground(new Color(230,230,230));
+		}
+	}
+	
+	private void setCurrentDrinkingTable() {
+		TreeMap<Integer, HoadonDto> currentDrinking = PickTableBus.getInstance().drinkingTable;
+		for (Map.Entry<Integer, HoadonDto> entry : currentDrinking.entrySet()) {
+			for (JButton jButton : arrTableButton) {
+				if(entry.getKey().toString().equals(jButton.getText())) {
+					jButton.doClick();
+				}
+			}
+		}
 	}
 
 }

@@ -36,7 +36,7 @@ public class QLTS_SQLDatabaseService extends QLTS_DB implements iQLTS_Procedure 
 	public void setErrorReportListener(iErrorReport _ireport ) {
 		this.iErrorReport = _ireport;
 	}
-	private void writeError(String error) {
+	public void writeError(String error) {
 		this.reportError = error;
 		if(iErrorReport!=null) {
 			this.iErrorReport.weHaveError(this.reportError);
