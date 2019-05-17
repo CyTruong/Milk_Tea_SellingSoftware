@@ -27,6 +27,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MenuFrame extends JFrame {
 
@@ -58,6 +60,14 @@ public class MenuFrame extends JFrame {
 		getContentPane().setLayout(gridBagLayout);
 		
 		JButton btnBanhang = new JButton("B\u00E1n h\u00E0ng");
+		btnBanhang.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PickTableFrame frame = new PickTableFrame();
+				frame.setVisible(true);
+				frame.setFocusable(true);
+				dispose();
+			}
+		});
 		btnBanhang.setForeground(Color.BLACK);
 		btnBanhang.setBackground(Color.GREEN);
 		GridBagConstraints gbc_btnBanhang = new GridBagConstraints();

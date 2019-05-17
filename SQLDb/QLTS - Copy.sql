@@ -765,7 +765,7 @@ VALUES
 	    'cy',  -- USENAME - char(256)
 	    '1',  -- PASSWORD - char(256)
 	    10000,   -- QUYEN_HAN - int
-	    NULL -- ISDELETED - bit
+	    0 -- ISDELETED - bit
 	    )
 
 		INSERT dbo.HOA_DON

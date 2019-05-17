@@ -357,6 +357,7 @@ public class PickTableFrame extends JFrame implements ActionListener  {
 	private void setSelectedtable() {
 		if(selectedTable!=null) {
 			setDefautColor();
+			setCurrentDrinkingTable();
 			selectedTable.setBackground(new Color(160, 204, 238));
 		}
 	}
@@ -378,7 +379,7 @@ public class PickTableFrame extends JFrame implements ActionListener  {
 		for (Map.Entry<Integer, HoadonDto> entry : currentDrinking.entrySet()) {
 			for (JButton jButton : arrTableButton) {
 				if(entry.getKey().toString().equals(jButton.getText())) {
-					jButton.doClick();
+					jButton.setBackground(Color.GREEN);
 				}
 			}
 		}
