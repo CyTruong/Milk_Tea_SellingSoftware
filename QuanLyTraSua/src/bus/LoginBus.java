@@ -3,7 +3,8 @@ package bus;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dal.QLTS_SQLDatabaseService;
+import dal.QLTS_DatabaseControler;
+import dal.QLTS_SQL_Procedure;
 import dal.iErrorReport;
 import dto.NhanvienDto;
 
@@ -27,7 +28,7 @@ public class LoginBus {
 	}
 	
 	public Login_result doLogin() throws SQLException {
-		QLTS_SQLDatabaseService.getInstance().setErrorReportListener(new iErrorReport() {
+	QLTS_DatabaseControler.getInstance().getProcedures().setErrorReportListener(new iErrorReport() {
 			
 			@Override
 			public void weHaveError(String errmess) {
@@ -35,7 +36,7 @@ public class LoginBus {
 				
 			}
 		});
-		ResultSet nhanviens=QLTS_SQLDatabaseService.getInstance().selectNhanVien();      
+		ResultSet nhanviens=QLTS_DatabaseControler.getInstance().getProcedures().selectNhanVien();      
 		while(nhanviens.next()) {
 			NhanvienDto nhanvien = new NhanvienDto();
 			nhanvien.mapping(nhanviens);

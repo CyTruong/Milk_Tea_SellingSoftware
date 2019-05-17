@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import dal.QLTS_SQLDatabaseService;
+import dal.QLTS_DatabaseControler;
+import dal.QLTS_SQL_Procedure;
+import dal.iQLTS_Procedure;
 import dto.HoadonDto;
 
 public class PickTableBus {
@@ -26,7 +28,7 @@ public class PickTableBus {
 	
 	public PickTableBus() {
 			drinkingTable = new TreeMap<>();
-			initIdThread init = new initIdThread(QLTS_SQLDatabaseService.getInstance());
+			initIdThread init = new initIdThread(QLTS_DatabaseControler.getInstance().getProcedures());
 			init.start();
 	}
 	
@@ -34,9 +36,9 @@ public class PickTableBus {
 
 class initIdThread extends Thread{
 
-	private QLTS_SQLDatabaseService database_access;
+	private iQLTS_Procedure database_access;
 	
-	public  initIdThread(QLTS_SQLDatabaseService dal) {
+	public  initIdThread(iQLTS_Procedure dal) {
 		this.database_access  = dal;
 	} 
 	@Override
@@ -62,7 +64,6 @@ class initIdThread extends Thread{
 				
 				System.out.println("Id mang về hiện tại "+PickTableBus.getInstance().nextMangveid);
 			} catch (SQLException e) {
-				database_access.writeError(e.toString());
 				e.printStackTrace();
 			}
 		}
