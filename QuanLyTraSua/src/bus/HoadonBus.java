@@ -11,22 +11,22 @@ import dal.QLTS_SQL_Procedure;
 import dal.iQLTS_Procedure;
 import dto.HoadonDto;
 
-public class PickTableBus {
+public class HoadonBus {
 	public static int currentCard = 0 ;
 	public static int currentType = 0;
 	public static int nextMangveid = 0;
 	public TreeMap<Integer, HoadonDto> drinkingTable ;
 	
-	private static PickTableBus _instance = null;
+	private static HoadonBus _instance = null;
 
-	public static PickTableBus getInstance() {
+	public static HoadonBus getInstance() {
 		if(_instance == null) {
-			_instance = new PickTableBus();
+			_instance = new HoadonBus();
 		}
 		return _instance;
 	}
 	
-	public PickTableBus() {
+	public HoadonBus() {
 			drinkingTable = new TreeMap<>();
 			initIdThread init = new initIdThread(QLTS_DatabaseControler.getInstance().getProcedures());
 			init.start();
@@ -49,20 +49,11 @@ class initIdThread extends Thread{
 				while(resultset.next()) {
 					HoadonDto hoadon = new HoadonDto();
 					hoadon.mapping(resultset);
-					if(hoadon.hinhthucmua==1) {
-						if(hoadon.tongtien==0) {
-							PickTableBus.getInstance().drinkingTable.put(hoadon.mathe, hoadon);
-							System.out.println("Hoa don chua thanh toan "+hoadon.mathe);
-						}
-					}
-					else {
-						PickTableBus.getInstance().nextMangveid=Math.max(PickTableBus.getInstance().nextMangveid, hoadon.mathe);
-					}
-					
+					HoadonBus.getInstance().nextMangveid=Math.max(HoadonBus.getInstance().nextMangveid, hoadon.mathe); 					
 				 }
-				PickTableBus.getInstance().nextMangveid++;
+				HoadonBus.getInstance().nextMangveid++;
 				
-				System.out.println("Id mang về hiện tại "+PickTableBus.getInstance().nextMangveid);
+				System.out.println("Id tiếp theo "+HoadonBus.getInstance().nextMangveid);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

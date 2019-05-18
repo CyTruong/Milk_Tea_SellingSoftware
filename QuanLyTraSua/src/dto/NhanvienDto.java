@@ -9,6 +9,7 @@ public class NhanvienDto extends baseDto {
 	public String hoten;
 	public String sdt;
 	public String username;
+	public int quyenhan;
 	public String password;
 	
 	public NhanvienDto() {
@@ -23,8 +24,8 @@ public class NhanvienDto extends baseDto {
 		this.sdt = sqlResult.getString(3).replaceAll("  ", "");
 		this.username = sqlResult.getString(4).replaceAll(" ", "");
 		this.password = sqlResult.getString(5).replaceAll(" ", "");
-		this.isdeleted = sqlResult.getBoolean(6);
-		
+		this.quyenhan = sqlResult.getInt(6);
+		this.isdeleted = sqlResult.getBoolean(7);
 	}
 
 }

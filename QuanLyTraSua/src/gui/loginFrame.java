@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import bus.LoginBus;
 import bus.LoginBus.Login_result;
-import bus.PickTableBus;
+import bus.HoadonBus;
 import mdlaf.MaterialLookAndFeel;
 
 import javax.swing.JTextField;
@@ -120,6 +120,6 @@ public class loginFrame extends JFrame {
 	}
 	
 	private void loadDrinkingTableContent() {
-		PickTableBus.getInstance();
+		HoadonBus.getInstance();
 	}
 }

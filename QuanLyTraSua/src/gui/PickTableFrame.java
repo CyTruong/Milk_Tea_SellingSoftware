@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import bus.PickTableBus;
+import bus.HoadonBus;
 import dto.HoadonDto;
 import mdlaf.MaterialLookAndFeel;
 
@@ -375,7 +375,7 @@ public class PickTableFrame extends JFrame implements ActionListener  {
 	}
 	
 	private void setCurrentDrinkingTable() {
-		TreeMap<Integer, HoadonDto> currentDrinking = PickTableBus.getInstance().drinkingTable;
+		TreeMap<Integer, HoadonDto> currentDrinking = HoadonBus.getInstance().drinkingTable;
 		for (Map.Entry<Integer, HoadonDto> entry : currentDrinking.entrySet()) {
 			for (JButton jButton : arrTableButton) {
 				if(entry.getKey().toString().equals(jButton.getText())) {
