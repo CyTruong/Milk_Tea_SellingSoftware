@@ -58,4 +58,6 @@ public interface iQLTS_Procedure {
 	public ResultSet selectDouong();
 	public ResultSet selectDouong(int madouong);
 	
+	public boolean updateThongtinquan(String tenquan,String header,String footer);
+	public ResultSet selectThongtinquan();
 }

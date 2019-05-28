@@ -28,7 +28,7 @@ public class LoaidouongDto extends baseDto
 	@Override
 	public void mapping(ResultSet sqlResult) throws SQLException {
 			this.maloai = sqlResult.getInt(1);
-			this.tenloai = sqlResult.getString(2);
+			this.tenloai = sqlResult.getString(2).trim();
 			this.isdeleted = sqlResult.getBoolean(3);
 		
 
