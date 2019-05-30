@@ -13,8 +13,8 @@ public class ThongtinquanDTO extends baseDto {
 	}
 	@Override
 	public void mapping(ResultSet sqlResult) throws SQLException {
-		this.tenquan = sqlResult.getString(1).trim();
-		this.header = sqlResult.getString(2).trim();
+		this.tenquan = sqlResult.getString(1).trim().replace("-", "\n");
+		this.header = sqlResult.getString(2).trim().replace("-", "\n");
 		this.footer = sqlResult.getString(3).trim();
 	}
 
