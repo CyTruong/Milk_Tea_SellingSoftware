@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import bus.LoginBus;
 import bus.LoginBus.Login_result;
+import bus.ThongtinquanBus;
 import bus.HoadonBus;
 import mdlaf.MaterialLookAndFeel;
 
@@ -117,9 +118,19 @@ public class loginFrame extends JFrame {
 		contentPane.add(tfPass);
 		
 		loadDrinkingTableContent();
+		loadThongtinquan();
 	}
 	
 	private void loadDrinkingTableContent() {
 		HoadonBus.getInstance();
+	}
+	
+	private void loadThongtinquan() {
+		try {
+			ThongtinquanBus.getInstance().getInfoFromDb();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

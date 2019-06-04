@@ -22,7 +22,7 @@ public class ChitiethoadonDto extends baseDto {
 		this.mahoadon = sqlResult.getInt(2);
 		this.madouong = sqlResult.getInt(3);
 		this.size = sqlResult.getInt(4);
-		this.topping = sqlResult.getString(5);
+		this.topping = sqlResult.getString(5).trim();
 		this.giatien = sqlResult.getInt(6);
 	}
 

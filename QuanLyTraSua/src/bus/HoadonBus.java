@@ -15,6 +15,7 @@ public class HoadonBus {
 	public static int currentCard = 0 ;
 	public static int currentType = 0;
 	public static int nextMangveid = 0;
+	public static int curId = 0;
 	public TreeMap<Integer, HoadonDto> drinkingTable ;
 	
 	private static HoadonBus _instance = null;
@@ -30,6 +31,18 @@ public class HoadonBus {
 			drinkingTable = new TreeMap<>();
 			initIdThread init = new initIdThread(QLTS_DatabaseControler.getInstance().getProcedures());
 			init.start();
+	}
+	
+	public void reGet() {
+		curId = 0;
+		nextMangveid = 0;
+		initIdThread init = new initIdThread(QLTS_DatabaseControler.getInstance().getProcedures());
+		try {
+			init.join();
+		} catch (InterruptedException e) {
+			init.start();
+			e.printStackTrace();
+		}
 	}
 	
 }
@@ -50,11 +63,12 @@ class initIdThread extends Thread{
 					HoadonDto hoadon = new HoadonDto();
 					hoadon.mapping(resultset);
 					HoadonBus.getInstance().nextMangveid=Math.max(HoadonBus.getInstance().nextMangveid, hoadon.mathe); 					
-				 }
+					HoadonBus.getInstance().curId = Math.max(HoadonBus.getInstance().curId, hoadon.mahoadon);
+				}
 				HoadonBus.getInstance().nextMangveid++;
-				
-				System.out.println("Id tiếp theo "+HoadonBus.getInstance().nextMangveid);
-			} catch (SQLException e) {
+				System.out.println("Id mang ve tiep theo theo "+HoadonBus.getInstance().nextMangveid);
+				System.out.println("Id  "+HoadonBus.getInstance().curId);
+			}   catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}

@@ -26,7 +26,7 @@ public class HoadonDto extends baseDto {
 		this.ngaymua = sqlResult.getTimestamp(3);
 		this.hinhthucmua = sqlResult.getInt(4);
 		this.mathe = sqlResult.getInt(5);
-		this.magiamgia = sqlResult.getString(6);
+		this.magiamgia = sqlResult.getString(6).trim();
 		this.manhanvien = sqlResult.getInt(7);
 		this.tiennhan = sqlResult.getInt(8);
 		this.isdeleted = sqlResult.getBoolean(9);

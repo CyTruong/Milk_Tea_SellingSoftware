@@ -514,7 +514,7 @@ public class QLTS_SQL_Procedure extends QLTS_DB implements iQLTS_Procedure {
 			callableStatement.setInt(3, maloaidouong);
 			callableStatement.setBoolean(4, false);
 			callableStatement.executeUpdate();
-			return false;
+			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			writeError(e.toString());
@@ -547,8 +547,34 @@ public class QLTS_SQL_Procedure extends QLTS_DB implements iQLTS_Procedure {
 			callableStatement.setInt(1, madouong);
 			return callableStatement.executeQuery();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			writeError(e.toString());
 			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public boolean updateThongtinquan(String tenquan, String header, String footer) {
+		try {
+			callableStatement = connection.prepareCall("{call THONG_TIN_QUANUPDATEPROCEDURE(?,?,?)}");
+			callableStatement.setString(1, tenquan);
+			callableStatement.setString(2, header);
+			callableStatement.setString(3, footer);
+			callableStatement.executeUpdate();
+		} catch (Exception e) {
+			writeError(e.toString());
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public ResultSet selectThongtinquan() {
+		try {
+			return connection.createStatement().executeQuery("select * from THONG_TIN_QUAN");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			writeError(e.toString());
 		}
 		return null;
 	}

@@ -17,7 +17,7 @@ public class Douongdto extends baseDto{
 	public void mapping(ResultSet sqlResult) throws SQLException {
 		// TODO Auto-generated method stub
 		this.madouong = sqlResult.getInt(1);
-		this.tendouong = sqlResult.getString(2);
+		this.tendouong = sqlResult.getString(2).trim();
 		this.maloaidouong = sqlResult.getInt(3);
 		this.isdeleted = sqlResult.getBoolean(4);
 	}

@@ -10,7 +10,8 @@ public class test {
             + "databaseName=QUANLITRASUA;"
             + "integratedSecurity=true";
 	public static void main(String[] args) {
-		QLTS_SQL_Procedure.setConncectionString(DB_URL);
+	/*
+	 * 	QLTS_SQL_Procedure.setConncectionString(DB_URL);
 		QLTS_SQL_Procedure.getInstance().setErrorReportListener(new iErrorReport() {
 			
 			@Override
@@ -33,7 +34,7 @@ public class test {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 }
