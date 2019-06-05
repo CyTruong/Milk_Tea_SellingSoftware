@@ -29,12 +29,15 @@ public class DoUongBus {
 		return dto;
 	}
 	
-	public int getGiatien(int madouong ,int size) {
+	public int getGiatien(int size ,int madouong) {
 		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectBanggia(size, madouong);
 		try {
 			while(rs.next()) {
 				BanggiaDto banggia = new BanggiaDto();
-				return banggia.giatien;
+				banggia.mapping(rs);
+				if(!banggia.isdeleted) {
+					return banggia.giatien;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

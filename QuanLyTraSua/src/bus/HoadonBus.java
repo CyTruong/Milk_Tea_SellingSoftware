@@ -33,7 +33,21 @@ public class HoadonBus {
 			init.start();
 	}
 	
-	public void reGet() {
+	public HoadonDto getDto(int mahoadon) {
+		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectHoadon(mahoadon);
+		HoadonDto hoadondto = new HoadonDto();
+		try {
+			while(rs.next()) {
+				hoadondto.mapping(rs);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return hoadondto;
+	}
+	/*
+	public int reGet() {
 		curId = 0;
 		nextMangveid = 0;
 		initIdThread init = new initIdThread(QLTS_DatabaseControler.getInstance().getProcedures());
@@ -43,8 +57,9 @@ public class HoadonBus {
 			init.start();
 			e.printStackTrace();
 		}
+		return curId;
 	}
-	
+	*/
 }
 
 class initIdThread extends Thread{

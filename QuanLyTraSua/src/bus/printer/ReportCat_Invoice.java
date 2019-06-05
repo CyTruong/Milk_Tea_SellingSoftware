@@ -73,7 +73,7 @@ public class ReportCat_Invoice {
 		inner.add(Gp);
 		inner.add(tfHoadon(), c);
 		inner.add(new ScalePrint(getThongtinHoadon(), 1.2, ScalePrint.MODE_AUTO_WIDTH), c);
-		inner.add(new ScalePrint(gettabel(), 1.5, ScalePrint.MODE_AUTO_WIDTH), c);
+		inner.add(new ScalePrint(gettabel(), 1.3, ScalePrint.MODE_AUTO_WIDTH), c);
 		inner.add(new ScalePrint(gettienthoi(),1.2,ScalePrint.MODE_AUTO_WIDTH),c);
 		inner.add(getFooter());
 		return inner;
@@ -118,6 +118,7 @@ public class ReportCat_Invoice {
 		TablePrint TP = new TablePrint(reportmodel);
 		TP.setMinimumColumnWidth(0, 100);
 		TP.setMinimumColumnWidth(2, 80);
+		TP.setFitWidth(true);
 		TP.setCellDrawer(String.class, new TextTableCellDrawer());
 
 		// TP.setFitWidth(true);
