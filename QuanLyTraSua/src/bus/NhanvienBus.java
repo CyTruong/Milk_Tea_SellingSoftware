@@ -22,8 +22,9 @@ public class NhanvienBus {
 	public NhanvienDto getDto(int manhanvien) {
 		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectNhanvien(manhanvien);
 		NhanvienDto nhanviendto = new NhanvienDto();
+		nhanviendto.isdeleted = true;
 		try {
-			while(rs.next()) {
+			while(rs.next()&&!nhanviendto.isdeleted) {
 				nhanviendto.mapping(rs);
 			}
 		} catch (SQLException e) {

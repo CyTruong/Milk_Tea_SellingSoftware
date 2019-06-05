@@ -36,8 +36,9 @@ public class HoadonBus {
 	public HoadonDto getDto(int mahoadon) {
 		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectHoadon(mahoadon);
 		HoadonDto hoadondto = new HoadonDto();
+		hoadondto.isdeleted = true;
 		try {
-			while(rs.next()) {
+			while(rs.next()&&!hoadondto.isdeleted) {
 				hoadondto.mapping(rs);
 			}
 		} catch (SQLException e) {
