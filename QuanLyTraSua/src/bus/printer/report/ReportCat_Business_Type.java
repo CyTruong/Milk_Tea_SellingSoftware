@@ -1,4 +1,4 @@
-package bus.printer;
+package bus.printer.report;
 
 public class ReportCat_Business_Type {
 	public static final int BY_DATE = 1;

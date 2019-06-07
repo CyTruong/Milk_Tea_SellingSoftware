@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import dal.QLTS_DatabaseControler;
 import dal.QLTS_SQL_Procedure;
 import dal.iQLTS_Procedure;
+import dto.ChitiethoadonDto;
 import dto.HoadonDto;
 
 public class HoadonBus {
@@ -47,6 +48,25 @@ public class HoadonBus {
 		}
 		return hoadondto;
 	}
+	
+	public ArrayList<ChitiethoadonDto> getChitiethoadon(int mahoadon) {
+		ArrayList<ChitiethoadonDto> arr =new ArrayList<>();
+		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectChitiethoadon();
+		try {
+			while(rs.next()) {
+				ChitiethoadonDto dto = new ChitiethoadonDto();
+				dto.mapping(rs);;
+				if(!dto.isdeleted&&dto.mahoadon==mahoadon) {
+					arr.add(dto);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arr;
+	}
+	
 	/*
 	public int reGet() {
 		curId = 0;

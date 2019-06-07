@@ -5,8 +5,10 @@ import java.sql.SQLException;
 
 import javax.swing.JFrame;
 
+import bus.printer.report.ReportCat_Business;
 import dal.iErrorReport;
 import li.netcat.print.Print;
+import li.netcat.print.PrintConstants;
 import li.netcat.print.PrintManager;
 import li.netcat.print.util.TextPrint;
 
@@ -14,7 +16,8 @@ public class ReportCat_Printer implements iPrinterModule {
 
 	private Print _currentPrint;
 	private iErrorReport _ierrReport;
-
+	private int _orientation;
+	
 	@Override
 	public void setErrorReportListener(iErrorReport _ireport) {
 		_ierrReport = _ireport;
@@ -29,13 +32,12 @@ public class ReportCat_Printer implements iPrinterModule {
 	}
 
 	@Override
-	public PrinterResult creatPrinter() {
-		// TODO Auto-generated method stub
+	public PrinterResult createPrinter() {
 		return PrinterResult.SUCCESS;
 	}
 
 	@Override
-	public PrinterResult creatInvoice(int mahoadon) {
+	public PrinterResult createInvoice(int mahoadon) {
 		try {
 			ReportCat_Invoice invoice = new ReportCat_Invoice(mahoadon);
 			_currentPrint = invoice.getPrint();
@@ -44,19 +46,24 @@ public class ReportCat_Printer implements iPrinterModule {
 			writeError(e.toString());
 			return PrinterResult.FAIL;
 		}
+		_orientation = PrintConstants.HORIZONTAL;
 		return PrinterResult.SUCCESS;
 	}
 
 	@Override
 	public PrinterResult showReport() {
-		JFrame jframe = new PrintPreview(_currentPrint).open();
+		PrintPreview preview = new PrintPreview(_currentPrint);
+		preview.getPreviewPanel().getPrintManager().setOrientation(_orientation);
+		preview.open();
 		return PrinterResult.SUCCESS;
 	}
 
 	@Override
 	public PrinterResult printReport() {
 		try {
-			new PrintManager(_currentPrint).print(true);
+			PrintManager manager = new PrintManager(_currentPrint);
+			manager.setOrientation(_orientation);
+			manager.print(true);
 		} catch (PrinterException e) {
 			e.printStackTrace();
 			writeError(e.toString());
@@ -64,5 +71,13 @@ public class ReportCat_Printer implements iPrinterModule {
 		}
 		return PrinterResult.SUCCESS;
 	}
+
+	@Override
+	public PrinterResult createBussinessReport(ReportCat_Business rp) {
+		_currentPrint = rp.getPrint();
+		_orientation = PrintConstants.LANDSCAPE;
+		return PrinterResult.SUCCESS;
+	}
+	
 
 }

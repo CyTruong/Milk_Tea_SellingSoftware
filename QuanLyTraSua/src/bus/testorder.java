@@ -12,6 +12,8 @@ public class testorder {
 		// thêm từng móm
 		PurchaseBus.getInstance().Themmon(1, 1, "Trân châu đường đen");
 		PurchaseBus.getInstance().Themmon(1, 1, "1 loại topping kì bí nào đó");
+		PurchaseBus.getInstance().Themmon(1, 1, "đây chính là một cái topping etc nào đó mà tên nó dài vcl ra.... thằng này uống lắm topping vl ");
+
 		// xóa món với index là thứ tự món dc thêm
 		//PurchaseBus.getInstance().XoaMon(index)
 		// xác nhận đơn
@@ -22,7 +24,7 @@ public class testorder {
 		//set module cho module in
 		Printer_Controler.getInstance().setModule(PrinterModule.REPORTCART);
 		//tạo 1 bản in hóa đơn vs index là mã hóa đơn
-		Printer_Controler.getInstance().getModule().creatInvoice(index);
+		Printer_Controler.getInstance().getModule().createInvoice(index);
 		//show hóa đơn
 		Printer_Controler.getInstance().getModule().showReport();
 		//in hóa đơn vừa tạo

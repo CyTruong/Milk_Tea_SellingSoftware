@@ -21,7 +21,9 @@ public class DoUongBus {
 		Douongdto dto = new Douongdto();
 		try {
 			ResultSet result = QLTS_DatabaseControler.getInstance().getProcedures().selectDouong(madouong);
-			dto.mapping(result);
+			while(result.next()) {
+				dto.mapping(result);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
