@@ -5,44 +5,42 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.swing.JLabel;
 
+import bus.HoadonBus;
+import dto.ChitiethoadonDto;
 import dto.HoadonDto;
 import li.netcat.print.Print;
 import li.netcat.print.util.TextPrint;
 
-public class ReportCat_Business_Byweek extends ReportCat_Business {
+public class ReportCat_Businness_Byday extends ReportCat_Business {
 
-	public ReportCat_Business_Byweek(Object[] arg) {
+	public ReportCat_Businness_Byday( Object[] arg) {
 		super(arg);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	protected Print getTittle() {
 		Timestamp timestamp = (Timestamp) _arg[0];
-		int day = timestamp.getDay() / 4;
-		TextPrint tp = new TextPrint("Báo cáo doanh thu tuần thứ "+day+" trong tháng " + new SimpleDateFormat("MM/yyy").format(timestamp));
+		TextPrint tp = new TextPrint("Báo cáo doanh thu ngày : " + new SimpleDateFormat("dd/MM/yyy").format(timestamp));
 		tp.setHorizontalAlignment(JLabel.CENTER);
 		return tp;
 	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	protected ArrayList<HoadonDto> getFillterResult(ResultSet resultSet) {
 		ArrayList<HoadonDto> hdarr = new ArrayList<>();
 		Timestamp timestamp = (Timestamp) _arg[0];
-		Calendar inputcalendar = Calendar.getInstance();
-		inputcalendar.setTimeInMillis(timestamp.getTime());
 		try {
 			while (resultSet.next()) {
 				HoadonDto hddto = new HoadonDto();
 				hddto.mapping(resultSet);
 				if (!hddto.isdeleted) {
-					Calendar rscalendar = Calendar.getInstance();
-					rscalendar.setTimeInMillis(timestamp.getTime());
-					if(rscalendar.WEEK_OF_YEAR == inputcalendar.WEEK_OF_YEAR) {
+					if (timestamp.getDay() == hddto.ngaymua.getDay()
+							&& timestamp.getMonth() == hddto.ngaymua.getMonth()
+							&& timestamp.getYear() == hddto.ngaymua.getYear()) {
 						hdarr.add(hddto);
 					}
 				}

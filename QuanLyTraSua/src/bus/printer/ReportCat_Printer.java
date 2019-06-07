@@ -46,7 +46,7 @@ public class ReportCat_Printer implements iPrinterModule {
 			writeError(e.toString());
 			return PrinterResult.FAIL;
 		}
-		_orientation = PrintConstants.HORIZONTAL;
+		_orientation = PrintConstants.PORTRAIT;
 		return PrinterResult.SUCCESS;
 	}
 

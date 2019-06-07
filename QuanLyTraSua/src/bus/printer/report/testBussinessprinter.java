@@ -11,7 +11,7 @@ public class testBussinessprinter {
 		Printer_Controler.getInstance().setModule(PrinterModule.REPORTCART);
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		Object[] arg = {time};
-		Printer_Controler.getInstance().getModule().createBussinessReport(new ReportCat_Bussinness_Byday(arg));
+		Printer_Controler.getInstance().getModule().createBussinessReport(new ReportCat_Business_Bymonth(arg));
 		Printer_Controler.getInstance().getModule().showReport();
 	}
 

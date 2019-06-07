@@ -134,9 +134,13 @@ public class ReportCat_Invoice {
 	private Print getThongtinHoadon() throws SQLException {
 		GridPrintConstraints c = GridPrintConstraints.DEFAULT;
 		GridPrint GpHoadon = new GridPrint(2, 2);
-		GpHoadon.add(new TextPrint("Mang về    : " + _hoadondto.hinhthucmua));
+		if(_hoadondto.hinhthucmua==1) {
+			GpHoadon.add(new TextPrint("Mang về"));
+		}else {
+			GpHoadon.add(new TextPrint("Uống tại chổ"));
+		}
 		GridPrint gpleft = new GridPrint(2, 2);
-		gpleft.add(new TextPrint("Số hóa đơn : " + _hoadondto.mathe));
+		gpleft.add(new TextPrint("Số hóa đơn : " + _hoadondto.mahoadon	));
 		gpleft.add(new TextPrint("Nhân viên  : " + gettennhanvien(_hoadondto.manhanvien)));
 		GpHoadon.add(gpleft, c.colSpan(2).colWidth(30));
 		GridPrint gpRight = new GridPrint(2, 2);
