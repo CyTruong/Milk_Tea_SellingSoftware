@@ -2,6 +2,7 @@ package bus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dal.QLTS_DatabaseControler;
 import dto.BanggiaDto;
@@ -31,6 +32,23 @@ public class DoUongBus {
 		return dto;
 	}
 	
+	public ArrayList<Douongdto> getList(int maloaidouong){
+		ArrayList<Douongdto> arr = new ArrayList<>();
+		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectDouong();
+		try {
+			while(rs.next()) {
+				Douongdto dto = new Douongdto();
+				dto.mapping(rs);
+				if(dto.madouong==maloaidouong && !dto.isdeleted) {
+					arr.add(dto);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arr;
+	}
 	public int getGiatien(int size ,int madouong) {
 		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectBanggia(size, madouong);
 		try {

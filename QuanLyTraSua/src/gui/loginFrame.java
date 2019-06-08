@@ -29,6 +29,8 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.SystemColor;
 
 public class loginFrame extends JFrame {
 
@@ -68,16 +70,21 @@ public class loginFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 320, 292);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(244, 164, 96));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		tfUsername = new JTextField();
+		tfUsername.setColumns(10);
+		tfUsername.setBackground(new Color(244, 164, 96));
+		tfUsername.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		tfUsername.setBounds(131, 84, 143, 23);
 		contentPane.add(tfUsername);
-		tfUsername.setColumns(10);
 		
 		JButton btLogin = new JButton("\u0110\u0103ng nh\u1EADp");
+		btLogin.setBackground(new Color(204, 0, 0));
+		btLogin.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		btLogin.setHorizontalTextPosition(SwingConstants.CENTER);
 		btLogin.setForeground(Color.BLACK);
 		btLogin.addActionListener(new ActionListener() {
@@ -105,14 +112,21 @@ public class loginFrame extends JFrame {
 		contentPane.add(btLogin);
 		
 		JLabel lblTiKhon = new JLabel("T\u00E0i kho\u1EA3n");
+		lblTiKhon.setForeground(new Color(204, 0, 0));
+		lblTiKhon.setBackground(new Color(244, 164, 96));
+		lblTiKhon.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		lblTiKhon.setBounds(20, 84, 79, 23);
 		contentPane.add(lblTiKhon);
 		
 		JLabel lblMtKhu = new JLabel("M\u1EADt kh\u1EA9u");
+		lblMtKhu.setForeground(new Color(204, 0, 0));
+		lblMtKhu.setBackground(new Color(244, 164, 96));
+		lblMtKhu.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		lblMtKhu.setBounds(20, 137, 79, 19);
 		contentPane.add(lblMtKhu);
 		
 		tfPass = new JPasswordField();
+		tfPass.setBackground(SystemColor.text);
 		tfPass.setEchoChar('*');
 		tfPass.setBounds(131, 136, 143, 20);
 		contentPane.add(tfPass);
@@ -124,7 +138,6 @@ public class loginFrame extends JFrame {
 	private void loadDrinkingTableContent() {
 		HoadonBus.getInstance();
 	}
-	
 	private void loadThongtinquan() {
 		try {
 			ThongtinquanBus.getInstance().getInfoFromDb();

@@ -2,6 +2,7 @@ package bus;
 
 import bus.printer.Printer_Controler;
 import bus.printer.Printer_Controler.PrinterModule;
+import dto.ToppingDto;
 
 public class testorder {
 
@@ -10,9 +11,12 @@ public class testorder {
 		//tạo 1 đơn hàng mới
 		PurchaseBus.getInstance().creatnewOrder();
 		// thêm từng móm
-		PurchaseBus.getInstance().Themmon(1, 1, "Trân châu đường đen");
-		PurchaseBus.getInstance().Themmon(1, 1, "1 loại topping kì bí nào đó");
-		PurchaseBus.getInstance().Themmon(1, 1, "đây chính là một cái topping etc nào đó mà tên nó dài vcl ra.... thằng này uống lắm topping vl ");
+		
+		ToppingDto topping = ToppingBus.getInstance().getDto(1);
+		
+		PurchaseBus.getInstance().Themmon(1, 1, topping);
+		PurchaseBus.getInstance().Themmon(1, 1, topping);
+		PurchaseBus.getInstance().Themmon(1, 1, topping);
 
 		// xóa món với index là thứ tự món dc thêm
 		//PurchaseBus.getInstance().XoaMon(index)

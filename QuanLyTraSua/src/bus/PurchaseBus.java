@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import dal.QLTS_DatabaseControler;
 import dto.ChitiethoadonDto;
 import dto.HoadonDto;
+import dto.ToppingDto;
 
 public class PurchaseBus{
 	private static PurchaseBus _instance;
@@ -25,13 +26,13 @@ public class PurchaseBus{
 	private int orderIndex = 0;
 	
 	
-	public boolean Themmon(int madouong,int size,String topping) {
+	public boolean Themmon(int madouong,int size,ToppingDto topping) {
 		ChitiethoadonDto chitiethoadon = new ChitiethoadonDto();
 		chitiethoadon.madouong = madouong;
 		chitiethoadon.size = size;
-		chitiethoadon.topping = topping;
+		chitiethoadon.topping = topping.tentopping;
 		chitiethoadon.mahoadon = 0;
-		chitiethoadon.giatien = DoUongBus.getInstance().getGiatien(size, madouong);
+		chitiethoadon.giatien = DoUongBus.getInstance().getGiatien(size, madouong)+topping.giatien;
 		orderlist.add(chitiethoadon);
 		return true;
 	}
