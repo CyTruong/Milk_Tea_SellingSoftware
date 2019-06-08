@@ -363,6 +363,13 @@ go
 
 if exists (select 1
             from  sysobjects
+           where  id = object_id('THONG_TIN_QUAN')
+            and   type = 'U')
+   drop table THONG_TIN_QUAN
+GO
+
+if exists (select 1
+            from  sysobjects
            where  id = object_id('TOPPING')
             and   type = 'U')
    drop table TOPPING
@@ -396,7 +403,7 @@ create table CHI_TIET_HOA_DON (
    MA_HOA_DON           int                  not null,
    MA_DO_UONG           int                  not null,
    SIZE					int           not null,
-   CAC_LOAI_TOOPING     varchar(256)         null,
+   CAC_LOAI_TOOPING     NVARCHAR(250)        null,
    GIA_TIEN				INT						NULL,
    ISDELETED            bit                  null,
    constraint PK_CHI_TIET_HOA_DON primary key nonclustered (MA_CHI_TIET_HOA_DON)
@@ -416,7 +423,7 @@ go
 /*==============================================================*/
 create table DO_UONG (
    MA_DO_UONG           int            IDENTITY      not null,
-   TEN_DO_UONG          char(256)            not null,
+   TEN_DO_UONG          NVARCHAR(250)           not null,
    MA_LOAI_DO_UONG      int                  not null,
    ISDELETED            bit                  null,
    constraint PK_DO_UONG primary key nonclustered (MA_DO_UONG)
@@ -448,7 +455,7 @@ create table HOA_DON (
    THOI_GIAN            datetime             not null,
    HINH_THUC_MUA        int                  not null,
    MA_THE               int                  null,
-   MA_GIAM_GIA          char(256)            null,
+   MA_GIAM_GIA          NVARCHAR(250)           null,
    MA_NHAN_VIEN         int                  not null,
    TIENNHAN             int                  null,
    ISDELETED            bit                  null,
@@ -469,7 +476,7 @@ go
 /*==============================================================*/
 create table LOAI_DO_UONG (
    MA_LOAI_DO_UONG      int           IDENTITY       not null,
-   LOAI_DO_UONG         char(256)            not null,
+   LOAI_DO_UONG         NVARCHAR(250)           not null,
    ISDELETED            bit                  null,
    constraint PK_LOAI_DO_UONG primary key nonclustered (MA_LOAI_DO_UONG)
 )
@@ -480,13 +487,24 @@ go
 /*==============================================================*/
 create table NHAN_VIEN (
    MA_NHAN_VIEN         int           IDENTITY       not null,
-   HO_TEN               char(256)            not null,
-   SDT                  char(256)            not null,
-   USENAME              char(256)            not null,
-   PASSWORD             char(256)            not null,
+   HO_TEN               NVARCHAR(250)           not null,
+   SDT                  NVARCHAR(250)           not null,
+   USENAME              NVARCHAR(250)           not null,
+   PASSWORD             NVARCHAR(250)           not null,
    QUYEN_HAN			INT					NOT NULL,
    ISDELETED            bit                  null,
    constraint PK_NHAN_VIEN primary key nonclustered (MA_NHAN_VIEN)
+)
+go
+
+
+/*==============================================================*/
+/* Table: THONG_TIN_QUAN                                        */
+/*==============================================================*/
+create table THONG_TIN_QUAN (
+   TEN_QUAN             NVARCHAR(250)           null,
+   HEADER               NVARCHAR(250)           not null,
+   FOOTER               NVARCHAR(250)           null
 )
 go
 
@@ -495,8 +513,8 @@ go
 /*==============================================================*/
 create table TOPPING (
    MA_TOPPING           int           IDENTITY       not null,
-   TEN_TOPPING          char(256)            not null,
-   GIA_TIEN             money                not null,
+   TEN_TOPPING          NVARCHAR(250)           not null,
+   GIA_TIEN             INT                not null,
    ISDELETED            bit                  null,
    constraint PK_TOPPING primary key nonclustered (MA_TOPPING)
 )
@@ -563,7 +581,7 @@ where CHI_TIET_HOA_DON.MA_CHI_TIET_HOA_DON = @MA_CHI_TIET_HOA_DON
 end
 go
 
-create procedure CHI_TIET_HOA_DON_INSERTPROCEDURE  @MA_HOA_DON int,@MA_DO_UONG int,@SIZE int,@CAC_LOAI_TOOPING varchar(256),@Giatien int ,@ISDELETED bit as
+create procedure CHI_TIET_HOA_DON_INSERTPROCEDURE  @MA_HOA_DON int,@MA_DO_UONG int,@SIZE int,@CAC_LOAI_TOOPING NVARCHAR(250),@Giatien int ,@ISDELETED bit as
 begin
 insert into CHI_TIET_HOA_DON (CHI_TIET_HOA_DON.MA_HOA_DON,CHI_TIET_HOA_DON.MA_DO_UONG,CHI_TIET_HOA_DON.SIZE,CHI_TIET_HOA_DON.CAC_LOAI_TOOPING,dbo.CHI_TIET_HOA_DON.GIA_TIEN,CHI_TIET_HOA_DON.ISDELETED)
 values(@MA_HOA_DON,@MA_DO_UONG,@SIZE,@CAC_LOAI_TOOPING,@Giatien,@ISDELETED)
@@ -577,7 +595,7 @@ where CHI_TIET_HOA_DON.MA_CHI_TIET_HOA_DON = @MA_CHI_TIET_HOA_DON
 end
 go
 
-create procedure CHI_TIET_HOA_DON_UPDATEPROCEDURE  @MA_CHI_TIET_HOA_DON int,@MA_HOA_DON int,@MA_DO_UONG int,@SIZE int,@CAC_LOAI_TOOPING varchar(256),@Giatien int ,@ISDELETED bit as
+create procedure CHI_TIET_HOA_DON_UPDATEPROCEDURE  @MA_CHI_TIET_HOA_DON int,@MA_HOA_DON int,@MA_DO_UONG int,@SIZE int,@CAC_LOAI_TOOPING NVARCHAR(250),@Giatien int ,@ISDELETED bit as
 begin
 update CHI_TIET_HOA_DON
 set CHI_TIET_HOA_DON.MA_HOA_DON = @MA_HOA_DON, CHI_TIET_HOA_DON.MA_DO_UONG = @MA_DO_UONG, CHI_TIET_HOA_DON.SIZE = @SIZE, CHI_TIET_HOA_DON.CAC_LOAI_TOOPING = @CAC_LOAI_TOOPING, dbo.CHI_TIET_HOA_DON.GIA_TIEN = @Giatien,CHI_TIET_HOA_DON.ISDELETED = @ISDELETED
@@ -592,7 +610,7 @@ where HOA_DON.MA_HOA_DON = @MA_HOA_DON
 end
 go
 
-create procedure HOA__ON_INSERTPROCEDURE  @TONG_TIEN money,@THOI_GIAN datetime,@HINH_THUC_MUA int,@MA_THE int,@MA_GIAM_GIA char(256),@MA_NHAN_VIEN int,@TIENNHAN int,@ISDELETED bit as
+create procedure HOA__ON_INSERTPROCEDURE  @TONG_TIEN money,@THOI_GIAN datetime,@HINH_THUC_MUA int,@MA_THE int,@MA_GIAM_GIA NVARCHAR(250) ,@MA_NHAN_VIEN int,@TIENNHAN int,@ISDELETED bit as
 begin
 insert into HOA_DON (HOA_DON.TONG_TIEN,HOA_DON.THOI_GIAN,HOA_DON.HINH_THUC_MUA,HOA_DON.MA_THE,HOA_DON.MA_GIAM_GIA,HOA_DON.MA_NHAN_VIEN,HOA_DON.TIENNHAN,HOA_DON.ISDELETED)
 values( @TONG_TIEN,@THOI_GIAN,@HINH_THUC_MUA,@MA_THE,@MA_GIAM_GIA,@MA_NHAN_VIEN,@TIENNHAN,@ISDELETED)
@@ -606,7 +624,7 @@ where HOA_DON.MA_HOA_DON = @MA_HOA_DON
 end
 go
 
-create procedure HOA__ON_UPDATEPROCEDURE  @MA_HOA_DON int,@TONG_TIEN money,@THOI_GIAN datetime,@HINH_THUC_MUA int,@MA_THE int,@MA_GIAM_GIA char(256),@MA_NHAN_VIEN int,@TIENNHAN int,@ISDELETED bit as
+create procedure HOA__ON_UPDATEPROCEDURE  @MA_HOA_DON int,@TONG_TIEN money,@THOI_GIAN datetime,@HINH_THUC_MUA int,@MA_THE int,@MA_GIAM_GIA NVARCHAR(250) ,@MA_NHAN_VIEN int,@TIENNHAN int,@ISDELETED bit as
 begin
 update HOA_DON
 set HOA_DON.TONG_TIEN = @TONG_TIEN, HOA_DON.THOI_GIAN = @THOI_GIAN, HOA_DON.HINH_THUC_MUA = @HINH_THUC_MUA, HOA_DON.MA_THE = @MA_THE, HOA_DON.MA_GIAM_GIA = @MA_GIAM_GIA, HOA_DON.MA_NHAN_VIEN = @MA_NHAN_VIEN, HOA_DON.TIENNHAN = @TIENNHAN, HOA_DON.ISDELETED = @ISDELETED
@@ -621,7 +639,7 @@ where LOAI_DO_UONG.MA_LOAI_DO_UONG = @MA_LOAI_DO_UONG
 end
 go
 
-create procedure LOAI_DO_UONG_INSERTPROCEDURE   @LOAI_DO_UONG char(256),@ISDELETED bit as
+create procedure LOAI_DO_UONG_INSERTPROCEDURE   @LOAI_DO_UONG NVARCHAR(250) ,@ISDELETED bit as
 begin
 insert into LOAI_DO_UONG (   LOAI_DO_UONG.LOAI_DO_UONG,LOAI_DO_UONG.ISDELETED)
 values(  @LOAI_DO_UONG,@ISDELETED)
@@ -635,7 +653,7 @@ where LOAI_DO_UONG.MA_LOAI_DO_UONG = @MA_LOAI_DO_UONG
 end
 go
 
-create procedure LOAI_DO_UONG_UPDATEPROCEDURE  @MA_LOAI_DO_UONG int,@LOAI_DO_UONG char(256),@ISDELETED bit as
+create procedure LOAI_DO_UONG_UPDATEPROCEDURE  @MA_LOAI_DO_UONG int,@LOAI_DO_UONG NVARCHAR(250) ,@ISDELETED bit as
 begin
 update LOAI_DO_UONG
 set LOAI_DO_UONG.LOAI_DO_UONG = @LOAI_DO_UONG, LOAI_DO_UONG.ISDELETED = @ISDELETED
@@ -650,7 +668,7 @@ where NHAN_VIEN.MA_NHAN_VIEN = @MA_NHAN_VIEN
 end
 go
 
-create procedure NHAN_VIEN_INSERTPROCEDURE  @HO_TEN char(256),@SDT char(256),@USENAME char(256),@PASSWORD char(256),@QUYENHAN INT,@ISDELETED bit as
+create procedure NHAN_VIEN_INSERTPROCEDURE  @HO_TEN NVARCHAR(250) ,@SDT NVARCHAR(250) ,@USENAME NVARCHAR(250) ,@PASSWORD NVARCHAR(250) ,@QUYENHAN INT,@ISDELETED bit as
 begin
 insert into NHAN_VIEN (NHAN_VIEN.HO_TEN,NHAN_VIEN.SDT,NHAN_VIEN.USENAME,NHAN_VIEN.PASSWORD,dbo.NHAN_VIEN.QUYEN_HAN,NHAN_VIEN.ISDELETED)
 values(@HO_TEN,@SDT,@USENAME,@PASSWORD,@QUYENHAN,@ISDELETED)
@@ -664,7 +682,7 @@ where NHAN_VIEN.MA_NHAN_VIEN = @MA_NHAN_VIEN
 end
 go
 
-create procedure NHAN_VIEN_UPDATEPROCEDURE  @MA_NHAN_VIEN int,@HO_TEN char(256),@SDT char(256),@USENAME char(256),@PASSWORD char(256),@QUYENHAN INT,@ISDELETED bit as
+create procedure NHAN_VIEN_UPDATEPROCEDURE  @MA_NHAN_VIEN int,@HO_TEN NVARCHAR(250) ,@SDT NVARCHAR(250) ,@USENAME NVARCHAR(250) ,@PASSWORD NVARCHAR(250) ,@QUYENHAN INT,@ISDELETED bit as
 begin
 update NHAN_VIEN
 set NHAN_VIEN.HO_TEN = @HO_TEN, NHAN_VIEN.SDT = @SDT, NHAN_VIEN.USENAME = @USENAME, NHAN_VIEN.PASSWORD = @PASSWORD, dbo.NHAN_VIEN.QUYEN_HAN= @QUYENHAN ,NHAN_VIEN.ISDELETED = @ISDELETED
@@ -679,7 +697,7 @@ where TOPPING.MA_TOPPING = @MA_TOPPING
 end
 go
 
-create procedure TOPPING_INSERTPROCEDURE  @TEN_TOPPING char(256),@GIA_TIEN money,@ISDELETED bit as
+create procedure TOPPING_INSERTPROCEDURE  @TEN_TOPPING NVARCHAR(250) ,@GIA_TIEN money,@ISDELETED bit as
 begin
 insert into TOPPING (TOPPING.TEN_TOPPING,TOPPING.GIA_TIEN,TOPPING.ISDELETED)
 values(@TEN_TOPPING,@GIA_TIEN,@ISDELETED)
@@ -693,7 +711,7 @@ where TOPPING.MA_TOPPING = @MA_TOPPING
 end
 go
 
-create procedure TOPPING_UPDATEPROCEDURE  @MA_TOPPING int,@TEN_TOPPING char(256),@GIA_TIEN money,@ISDELETED bit as
+create procedure TOPPING_UPDATEPROCEDURE  @MA_TOPPING int,@TEN_TOPPING NVARCHAR(250) ,@GIA_TIEN money,@ISDELETED bit as
 begin
 update TOPPING
 set TOPPING.TEN_TOPPING = @TEN_TOPPING, TOPPING.GIA_TIEN = @GIA_TIEN, TOPPING.ISDELETED = @ISDELETED
@@ -708,7 +726,7 @@ where DO_UONG.MA_DO_UONG = @MA_DO_UONG
 end
 go
 
-create procedure _O_UONG_INSERTPROCEDURE @TEN_DO_UONG char(256),@MA_LOAI_DO_UONG int,@ISDELETED bit as
+create procedure _O_UONG_INSERTPROCEDURE @TEN_DO_UONG NVARCHAR(250) ,@MA_LOAI_DO_UONG int,@ISDELETED bit as
 begin
 insert into DO_UONG (DO_UONG.TEN_DO_UONG,DO_UONG.MA_LOAI_DO_UONG,DO_UONG.ISDELETED)
 values(@TEN_DO_UONG,@MA_LOAI_DO_UONG,@ISDELETED)
@@ -722,7 +740,7 @@ WHERE DO_UONG.MA_DO_UONG = @MA_DO_UONG
 END
 GO
 
-CREATE PROCEDURE _O_UONG_UPDATEPROCEDURE  @MA_DO_UONG INT,@TEN_DO_UONG CHAR(256),@MA_LOAI_DO_UONG INT,@ISDELETED BIT AS
+CREATE PROCEDURE _O_UONG_UPDATEPROCEDURE  @MA_DO_UONG INT,@TEN_DO_UONG NVARCHAR(250) ,@MA_LOAI_DO_UONG INT,@ISDELETED BIT AS
 BEGIN
 UPDATE DO_UONG
 SET DO_UONG.TEN_DO_UONG = @TEN_DO_UONG, DO_UONG.MA_LOAI_DO_UONG = @MA_LOAI_DO_UONG, DO_UONG.ISDELETED = @ISDELETED
@@ -730,6 +748,12 @@ WHERE (DO_UONG.MA_DO_UONG = @MA_DO_UONG)
 END
 GO
 
+CREATE PROCEDURE THONG_TIN_QUANUPDATEPROCEDURE @TEN_QUAN NVARCHAR(250) ,@HEADER NVARCHAR(250) ,@FOOTER NVARCHAR(250) AS
+BEGIN
+UPDATE dbo.THONG_TIN_QUAN
+SET TEN_QUAN = @TEN_QUAN , HEADER = @HEADER, FOOTER = @FOOTER
+END
+GO 
 
 /*
 USE master
@@ -737,6 +761,10 @@ DROP DATABASE QUANLITRASUA
 
 USE QUANLITRASUA
 go
+
+
+SELECT *
+FROM dbo.THONG_TIN_QUAN
 
 */
 
@@ -746,10 +774,12 @@ INSERT dbo.LOAI_DO_UONG
     LOAI_DO_UONG
 )
 VALUES
-(   'Kem' -- LOAI_DO_UONG - char(256)
+(   'Kem' -- LOAI_DO_UONG - NVARCHAR(250) 
     )
 	*/
 
+
+	
 	INSERT dbo.NHAN_VIEN
 	(
 	    HO_TEN,
@@ -760,14 +790,54 @@ VALUES
 	    ISDELETED
 	)
 	VALUES
-	(   'Pham Nhat Truong',  -- HO_TEN - char(256)
-	    '0563683819',  -- SDT - char(256)
-	    'cy',  -- USENAME - char(256)
-	    '1',  -- PASSWORD - char(256)
+	(   N'Phạm Nhật Trường',  -- HO_TEN - NVARCHAR(250) 
+	    N'0563683819',  -- SDT - NVARCHAR(250) 
+	    N'cy',  -- USENAME - NVARCHAR(250) 
+	    N'1',  -- PASSWORD - NVARCHAR(250) 
 	    10000,   -- QUYEN_HAN - int
 	    0 -- ISDELETED - bit
 	    )
+		GO
+     
 
+		INSERT dbo.THONG_TIN_QUAN
+		(
+		    TEN_QUAN,
+		    HEADER,
+		    FOOTER
+		)
+		VALUES
+		(   N'La Soleil-Chocola and Vanilla', -- TEN_QUAN - NVARCHAR(250) 
+		    N'khu phố 6, Thủ Đức, Hồ Chí Minh-sdt: 012345678-passwifi: nekopara', -- HEADER - NVARCHAR(250) 
+		    N'Cảm ơn quý khách'  -- FOOTER - NVARCHAR(250) 
+		    )
+		
+GO
+		/* Tạo 1 hóa đơn, cthd thử
+		*/
+		INSERT dbo.LOAI_DO_UONG
+		(
+		    LOAI_DO_UONG,
+		    ISDELETED
+		)
+		VALUES
+		(   N'Loai do uong A',  -- LOAI_DO_UONG - NVARCHAR(250) 
+		    0 -- ISDELETED - bit
+		    )
+
+		GO 
+		INSERT dbo.DO_UONG
+		(
+		    TEN_DO_UONG,
+		    MA_LOAI_DO_UONG,
+		    ISDELETED
+		)
+		VALUES
+		(   N'Cafe A',  -- TEN_DO_UONG - NVARCHAR(250) 
+		    1,   -- MA_LOAI_DO_UONG - int
+		    NULL -- ISDELETED - bit
+		    )
+		GO 
 		INSERT dbo.HOA_DON
 		(
 		    TONG_TIEN,
@@ -780,80 +850,107 @@ VALUES
 		    ISDELETED
 		)
 		VALUES
-		(   200000,      -- TONG_TIEN - money
+		(   1000000,      -- TONG_TIEN - money
 		    GETDATE(), -- THOI_GIAN - datetime
 		    0,         -- HINH_THUC_MUA - int
-		    0,         -- MA_THE - int
-		    'eo co',        -- MA_GIAM_GIA - char(256)
-		    2,         -- MA_NHAN_VIEN - int
-		    200000,         -- TIENNHAN - int
-		    0       -- ISDELETED - bit
-		    )
-
-	INSERT dbo.HOA_DON
-		(
-		    TONG_TIEN,
-		    THOI_GIAN,
-		    HINH_THUC_MUA,
-		    MA_THE,
-		    MA_GIAM_GIA,
-		    MA_NHAN_VIEN,
-		    TIENNHAN,
-		    ISDELETED
-		)
-		VALUES
-		(   200000,      -- TONG_TIEN - money
-		    GETDATE(), -- THOI_GIAN - datetime
-		    0,         -- HINH_THUC_MUA - int
-		    1,         -- MA_THE - int
-		    'eo co',        -- MA_GIAM_GIA - char(256)
-		    2,         -- MA_NHAN_VIEN - int
-		    200000,         -- TIENNHAN - int
-		    0       -- ISDELETED - bit
-		    )
-
-	INSERT dbo.HOA_DON
-		(
-		    TONG_TIEN,
-		    THOI_GIAN,
-		    HINH_THUC_MUA,
-		    MA_THE,
-		    MA_GIAM_GIA,
-		    MA_NHAN_VIEN,
-		    TIENNHAN,
-		    ISDELETED
-		)
-		VALUES
-		(   0,      -- TONG_TIEN - money
-		    GETDATE(), -- THOI_GIAN - datetime
-		    1,         -- HINH_THUC_MUA - int
-		    1,         -- MA_THE - int
-		    'eo co',        -- MA_GIAM_GIA - char(256)
-		    2,         -- MA_NHAN_VIEN - int
-		    0,         -- TIENNHAN - int
-		    0       -- ISDELETED - bit
-		    )
-
-	INSERT dbo.HOA_DON
-		(
-		    TONG_TIEN,
-		    THOI_GIAN,
-		    HINH_THUC_MUA,
-		    MA_THE,
-		    MA_GIAM_GIA,
-		    MA_NHAN_VIEN,
-		    TIENNHAN,
-		    ISDELETED
-		)
-		VALUES
-		(   0,      -- TONG_TIEN - money
-		    GETDATE(), -- THOI_GIAN - datetime
-		    1,         -- HINH_THUC_MUA - int
 		    5,         -- MA_THE - int
-		    'eo co',        -- MA_GIAM_GIA - char(256)
-		    2,         -- MA_NHAN_VIEN - int
-		    0,         -- TIENNHAN - int
+		    N'đoán xem',        -- MA_GIAM_GIA - NVARCHAR(250) 
+		    1,         -- MA_NHAN_VIEN - int
+		    1000000,         -- TIENNHAN - int
 		    0       -- ISDELETED - bit
 		    )
 
-	 	
+		GO 
+
+		INSERT dbo.CHI_TIET_HOA_DON
+		(
+		    MA_HOA_DON,
+		    MA_DO_UONG,
+		    SIZE,
+		    CAC_LOAI_TOOPING,
+		    GIA_TIEN,
+		    ISDELETED
+		)
+		VALUES
+		(   1,   -- MA_HOA_DON - int
+		    1,   -- MA_DO_UONG - int
+		    1,   -- SIZE - int
+		    N'Trân châu ',  -- CAC_LOAI_TOOPING - NVARCHAR(250)
+		    500000,   -- GIA_TIEN - int
+		    0 -- ISDELETED - bit
+		    )
+		
+		GO
+
+		
+
+      INSERT dbo.CHI_TIET_HOA_DON
+		(
+		    MA_HOA_DON,
+		    MA_DO_UONG,
+		    SIZE,
+		    CAC_LOAI_TOOPING,
+		    GIA_TIEN,
+		    ISDELETED
+		)
+		VALUES
+		(   1,   -- MA_HOA_DON - int
+		    1,   -- MA_DO_UONG - int
+		    1,   -- SIZE - int
+		    N'Trân châu & sương sáo & thạch trứng',  -- CAC_LOAI_TOOPING - NVARCHAR(250)
+		    500000,   -- GIA_TIEN - int
+		    0 -- ISDELETED - bit
+		    )
+	GO
+	INSERT dbo.BANG_GIA
+	(
+	    SIZE,
+	    MA_DO_UONG,
+	    GIA_TIEN,
+	    ISDELETED
+	)
+	VALUES
+	(  1,    -- SIZE - int
+	    1,    -- MA_DO_UONG - int
+	    100000, -- GIA_TIEN - money
+	    0  -- ISDELETED - bit
+	    )
+	
+		INSERT dbo.BANG_GIA
+	(
+	    SIZE,
+	    MA_DO_UONG,
+	    GIA_TIEN,
+	    ISDELETED
+	)
+	VALUES
+	(   2,    -- SIZE - int
+	    1,    -- MA_DO_UONG - int
+	    100000, -- GIA_TIEN - money
+	    0  -- ISDELETED - bit
+	    )
+INSERT dbo.BANG_GIA(
+	    SIZE,
+	    MA_DO_UONG,
+	    GIA_TIEN,
+	    ISDELETED
+	)
+	VALUES
+	(   3,    -- SIZE - int
+	    1,    -- MA_DO_UONG - int
+	    100000, -- GIA_TIEN - money
+	    0  -- ISDELETED - bit
+	    )
+		GO
+        INSERT dbo.TOPPING
+        (
+            TEN_TOPPING,
+            GIA_TIEN,
+            ISDELETED
+        )
+        VALUES
+        (   N'Trân châu đen',  -- TEN_TOPPING - nvarchar(250)
+            5000, -- GIA_TIEN - money
+            0  -- ISDELETED - bit
+            )
+		    
