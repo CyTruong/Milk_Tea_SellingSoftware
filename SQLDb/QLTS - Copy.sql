@@ -856,4 +856,4 @@ VALUES
 		    0       -- ISDELETED - bit
 		    )
 
-		
+	 	
