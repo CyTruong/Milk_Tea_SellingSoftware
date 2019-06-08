@@ -73,7 +73,7 @@ public class ReportCat_Invoice {
 		inner.add(Gp);
 		inner.add(tfHoadon(), c);
 		inner.add(new ScalePrint(getThongtinHoadon(), 1.2, ScalePrint.MODE_AUTO_WIDTH), c);
-		inner.add(new ScalePrint(gettabel(), 1.5, ScalePrint.MODE_AUTO_WIDTH), c);
+		inner.add(new ScalePrint(gettabel(), 1.3, ScalePrint.MODE_AUTO_WIDTH), c);
 		inner.add(new ScalePrint(gettienthoi(),1.2,ScalePrint.MODE_AUTO_WIDTH),c);
 		inner.add(getFooter());
 		return inner;
@@ -118,6 +118,7 @@ public class ReportCat_Invoice {
 		TablePrint TP = new TablePrint(reportmodel);
 		TP.setMinimumColumnWidth(0, 100);
 		TP.setMinimumColumnWidth(2, 80);
+		TP.setFitWidth(true);
 		TP.setCellDrawer(String.class, new TextTableCellDrawer());
 
 		// TP.setFitWidth(true);
@@ -133,9 +134,13 @@ public class ReportCat_Invoice {
 	private Print getThongtinHoadon() throws SQLException {
 		GridPrintConstraints c = GridPrintConstraints.DEFAULT;
 		GridPrint GpHoadon = new GridPrint(2, 2);
-		GpHoadon.add(new TextPrint("Mang về    : " + _hoadondto.hinhthucmua));
+		if(_hoadondto.hinhthucmua==1) {
+			GpHoadon.add(new TextPrint("Mang về"));
+		}else {
+			GpHoadon.add(new TextPrint("Uống tại chổ"));
+		}
 		GridPrint gpleft = new GridPrint(2, 2);
-		gpleft.add(new TextPrint("Số hóa đơn : " + _hoadondto.mathe));
+		gpleft.add(new TextPrint("Số hóa đơn : " + _hoadondto.mahoadon	));
 		gpleft.add(new TextPrint("Nhân viên  : " + gettennhanvien(_hoadondto.manhanvien)));
 		GpHoadon.add(gpleft, c.colSpan(2).colWidth(30));
 		GridPrint gpRight = new GridPrint(2, 2);

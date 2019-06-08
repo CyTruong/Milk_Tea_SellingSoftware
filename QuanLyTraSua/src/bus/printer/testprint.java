@@ -8,7 +8,7 @@ public class testprint {
 	public static void main(String args[]) {
 		//các thao tác để in 1 report
 		Printer_Controler.getInstance().setModule(PrinterModule.REPORTCART);
-		Printer_Controler.getInstance().getModule().creatInvoice(6);
+		Printer_Controler.getInstance().getModule().createInvoice(6);
 		Printer_Controler.getInstance().getModule().showReport();
 		Printer_Controler.getInstance().getModule().printReport();
 

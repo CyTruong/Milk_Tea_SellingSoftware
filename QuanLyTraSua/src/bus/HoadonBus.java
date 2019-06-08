@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import dal.QLTS_DatabaseControler;
 import dal.QLTS_SQL_Procedure;
 import dal.iQLTS_Procedure;
+import dto.ChitiethoadonDto;
 import dto.HoadonDto;
 
 public class HoadonBus {
@@ -33,7 +34,41 @@ public class HoadonBus {
 			init.start();
 	}
 	
-	public void reGet() {
+	public HoadonDto getDto(int mahoadon) {
+		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectHoadon(mahoadon);
+		HoadonDto hoadondto = new HoadonDto();
+		hoadondto.isdeleted = true;
+		try {
+			while(rs.next()&&!hoadondto.isdeleted) {
+				hoadondto.mapping(rs);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return hoadondto;
+	}
+	
+	public ArrayList<ChitiethoadonDto> getChitiethoadon(int mahoadon) {
+		ArrayList<ChitiethoadonDto> arr =new ArrayList<>();
+		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectChitiethoadon();
+		try {
+			while(rs.next()) {
+				ChitiethoadonDto dto = new ChitiethoadonDto();
+				dto.mapping(rs);;
+				if(!dto.isdeleted&&dto.mahoadon==mahoadon) {
+					arr.add(dto);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arr;
+	}
+	
+	/*
+	public int reGet() {
 		curId = 0;
 		nextMangveid = 0;
 		initIdThread init = new initIdThread(QLTS_DatabaseControler.getInstance().getProcedures());
@@ -43,8 +78,9 @@ public class HoadonBus {
 			init.start();
 			e.printStackTrace();
 		}
+		return curId;
 	}
-	
+	*/
 }
 
 class initIdThread extends Thread{

@@ -2,6 +2,7 @@ package bus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dal.QLTS_DatabaseControler;
 import dto.BanggiaDto;
@@ -21,7 +22,9 @@ public class DoUongBus {
 		Douongdto dto = new Douongdto();
 		try {
 			ResultSet result = QLTS_DatabaseControler.getInstance().getProcedures().selectDouong(madouong);
-			dto.mapping(result);
+			while(result.next()) {
+				dto.mapping(result);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -29,12 +32,32 @@ public class DoUongBus {
 		return dto;
 	}
 	
-	public int getGiatien(int madouong ,int size) {
+	public ArrayList<Douongdto> getList(int maloaidouong){
+		ArrayList<Douongdto> arr = new ArrayList<>();
+		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectDouong();
+		try {
+			while(rs.next()) {
+				Douongdto dto = new Douongdto();
+				dto.mapping(rs);
+				if(dto.madouong==maloaidouong && !dto.isdeleted) {
+					arr.add(dto);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arr;
+	}
+	public int getGiatien(int size ,int madouong) {
 		ResultSet rs = QLTS_DatabaseControler.getInstance().getProcedures().selectBanggia(size, madouong);
 		try {
 			while(rs.next()) {
 				BanggiaDto banggia = new BanggiaDto();
-				return banggia.giatien;
+				banggia.mapping(rs);
+				if(!banggia.isdeleted) {
+					return banggia.giatien;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
