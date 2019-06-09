@@ -26,13 +26,17 @@ public class PurchaseBus{
 	private int orderIndex = 0;
 	
 	
-	public boolean Themmon(int madouong,int size,ToppingDto topping) {
+	public boolean Themmon(int madouong,int size,ArrayList<ToppingDto> toppingarr) {
 		ChitiethoadonDto chitiethoadon = new ChitiethoadonDto();
 		chitiethoadon.madouong = madouong;
 		chitiethoadon.size = size;
-		chitiethoadon.topping = topping.tentopping;
 		chitiethoadon.mahoadon = 0;
-		chitiethoadon.giatien = DoUongBus.getInstance().getGiatien(size, madouong)+topping.giatien;
+		chitiethoadon.topping="";
+		chitiethoadon.giatien = DoUongBus.getInstance().getGiatien(size, madouong);
+		for (ToppingDto toppingDto : toppingarr) {
+			chitiethoadon.topping += toppingDto.tentopping+" ";
+			chitiethoadon.giatien += toppingDto.giatien;
+		}
 		orderlist.add(chitiethoadon);
 		return true;
 	}
@@ -51,31 +55,34 @@ public class PurchaseBus{
 	}
 	
 	public boolean finnishOrder(int Hinhthucmua,int mathe,String magiamgia,int tiennhan) {
-		int tongtien = 0;
-		for (ChitiethoadonDto chitiethoadonDto : orderlist) {
-			tongtien+= chitiethoadonDto.giatien;
-		}
-		QLTS_DatabaseControler.getInstance().getProcedures().insertHoadon(tongtien,new Timestamp(System.currentTimeMillis()), Hinhthucmua, mathe, magiamgia,1, tiennhan, false);
-
-	//	QLTS_DatabaseControler.getInstance().getProcedures().insertHoadon(tongtien,new Timestamp(System.currentTimeMillis()), Hinhthucmua, mathe, magiamgia,LoginBus.loginUser.manhanvien, tiennhan, false);
-		ResultSet resultset = QLTS_DatabaseControler.getInstance().getProcedures().selectHoadon();
-		int lastInsert = 0;
-		try {
-			while(resultset.next()) {
-				HoadonDto hoadon = new HoadonDto();
-				hoadon.mapping(resultset);
-				lastInsert=Math.max(lastInsert, hoadon.mahoadon); 					
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		System.out.println("last "+lastInsert);
 		
-		for (ChitiethoadonDto chitiethoadonDto : orderlist) {
-			QLTS_DatabaseControler.getInstance().getProcedures().insertChitiethoadon(lastInsert, chitiethoadonDto.madouong, chitiethoadonDto.size, chitiethoadonDto.topping, chitiethoadonDto.giatien);	
-		}
-		orderIndex = lastInsert;
+			int tongtien = 0;
+			for (ChitiethoadonDto chitiethoadonDto : orderlist) {
+				tongtien+= chitiethoadonDto.giatien;
+			}
+			QLTS_DatabaseControler.getInstance().getProcedures().insertHoadon(tongtien,new Timestamp(System.currentTimeMillis()), Hinhthucmua, mathe, magiamgia,1, tiennhan, false);
+
+		//	QLTS_DatabaseControler.getInstance().getProcedures().insertHoadon(tongtien,new Timestamp(System.currentTimeMillis()), Hinhthucmua, mathe, magiamgia,LoginBus.loginUser.manhanvien, tiennhan, false);
+			ResultSet resultset = QLTS_DatabaseControler.getInstance().getProcedures().selectHoadon();
+			int lastInsert = 0;
+			try {
+				while(resultset.next()) {
+					HoadonDto hoadon = new HoadonDto();
+					hoadon.mapping(resultset);
+					lastInsert=Math.max(lastInsert, hoadon.mahoadon); 					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+
+			}
+			System.out.println("last "+lastInsert);
+			
+			for (ChitiethoadonDto chitiethoadonDto : orderlist) {
+				QLTS_DatabaseControler.getInstance().getProcedures().insertChitiethoadon(lastInsert, chitiethoadonDto.madouong, chitiethoadonDto.size, chitiethoadonDto.topping, chitiethoadonDto.giatien);	
+			}
+			orderIndex = lastInsert;
+		
 		return true;
 	}
 }

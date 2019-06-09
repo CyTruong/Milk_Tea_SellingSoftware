@@ -12,7 +12,11 @@ public class ToppingDto extends baseDto{
 	public  ToppingDto() {
 		// TODO Auto-generated constructor stub
 	}
-	
+	public  ToppingDto(ToppingDto dto) {
+		this.matopping = dto.matopping;
+		this.tentopping = dto.tentopping;
+		this.giatien = dto.giatien;
+	}
 	@Override
 	public void mapping(ResultSet sqlResult) throws SQLException {
 		// TODO Auto-generated method stub

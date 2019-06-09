@@ -13,6 +13,12 @@ public class Douongdto extends baseDto{
 	public Douongdto() {
 		// TODO Auto-generated constructor stub
 	}
+	public Douongdto(Douongdto dto) {
+		this.madouong = dto.madouong;
+		this.tendouong = dto.tendouong;
+		this.madouong = dto.madouong;
+		this.isdeleted = dto.isdeleted;
+	}
 	@Override
 	public void mapping(ResultSet sqlResult) throws SQLException {
 		// TODO Auto-generated method stub

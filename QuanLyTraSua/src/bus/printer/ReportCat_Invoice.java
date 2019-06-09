@@ -140,7 +140,7 @@ public class ReportCat_Invoice {
 			GpHoadon.add(new TextPrint("Uống tại chổ"));
 		}
 		GridPrint gpleft = new GridPrint(2, 2);
-		gpleft.add(new TextPrint("Số hóa đơn : " + _hoadondto.mahoadon	));
+		gpleft.add(new TextPrint("Mã hóa đơn : " + _hoadondto.mahoadon	));
 		gpleft.add(new TextPrint("Nhân viên  : " + gettennhanvien(_hoadondto.manhanvien)));
 		GpHoadon.add(gpleft, c.colSpan(2).colWidth(30));
 		GridPrint gpRight = new GridPrint(2, 2);
@@ -164,9 +164,9 @@ public class ReportCat_Invoice {
 	
 	private Print gettienthoi() {
 		GridPrint gp = new GridPrint();
-		gp.add(new TextPrint("Tổng cộng      : "+_hoadondto.tongtien));
-		gp.add(new TextPrint("Tiền khách đưa : "+_hoadondto.tiennhan));
-		gp.add(new TextPrint("Tiền thối      : "+(_hoadondto.tongtien - _hoadondto.tiennhan)));
+		gp.add(new TextPrint("Tổng tiền      : "+_hoadondto.tongtien));
+		gp.add(new TextPrint("Tiền nhận      : "+_hoadondto.tiennhan));
+		gp.add(new TextPrint("Tiền thối      : "+(-_hoadondto.tongtien + _hoadondto.tiennhan)));
 		return gp;
 	}
 	private Print getFooter() {
@@ -219,7 +219,7 @@ class invoiceModel implements TableDataModel {
 	@Override
 	public Object getFooterAt(int arg0) {
 		if (arg0 == 0) {
-			return "Tổng";
+			return "Tá»•ng";
 		}
 		if (arg0 == 2) {
 			return format(_hoadon.tongtien);

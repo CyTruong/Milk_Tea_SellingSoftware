@@ -1,5 +1,7 @@
 package bus;
 
+import java.util.ArrayList;
+
 import bus.printer.Printer_Controler;
 import bus.printer.Printer_Controler.PrinterModule;
 import dto.ToppingDto;
@@ -13,10 +15,11 @@ public class testorder {
 		// thêm từng móm
 		
 		ToppingDto topping = ToppingBus.getInstance().getDto(1);
-		
-		PurchaseBus.getInstance().Themmon(1, 1, topping);
-		PurchaseBus.getInstance().Themmon(1, 1, topping);
-		PurchaseBus.getInstance().Themmon(1, 1, topping);
+		ArrayList<ToppingDto> tp = new ArrayList<>();
+		tp.add(topping);
+		PurchaseBus.getInstance().Themmon(1, 1, tp);
+		PurchaseBus.getInstance().Themmon(1, 1, tp);
+		PurchaseBus.getInstance().Themmon(1, 1, tp);
 
 		// xóa món với index là thứ tự món dc thêm
 		//PurchaseBus.getInstance().XoaMon(index)
@@ -33,6 +36,7 @@ public class testorder {
 		Printer_Controler.getInstance().getModule().showReport();
 		//in hóa đơn vừa tạo
 		Printer_Controler.getInstance().getModule().printReport();
+
 
 	}
 

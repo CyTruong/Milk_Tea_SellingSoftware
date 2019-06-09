@@ -39,7 +39,7 @@ public class DoUongBus {
 			while(rs.next()) {
 				Douongdto dto = new Douongdto();
 				dto.mapping(rs);
-				if(dto.madouong==maloaidouong && !dto.isdeleted) {
+				if(dto.maloaidouong==maloaidouong && !dto.isdeleted) {
 					arr.add(dto);
 				}
 			}

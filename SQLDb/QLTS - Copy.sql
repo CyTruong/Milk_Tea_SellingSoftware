@@ -441,7 +441,7 @@ go
 /*==============================================================*/
 /* Index: CHUA2_FK                                              */
 /*==============================================================*/
-create unique index CHUA2_FK on DO_UONG (
+create index CHUA2_FK on DO_UONG (
 MA_LOAI_DO_UONG ASC
 )
 go
@@ -954,3 +954,14 @@ INSERT dbo.BANG_GIA(
             0  -- ISDELETED - bit
             )
 		    
+			INSERT dbo.DO_UONG
+			(
+			    TEN_DO_UONG,
+			    MA_LOAI_DO_UONG,
+			    ISDELETED
+			)
+			VALUES
+			(   N'Cà fe B', -- TEN_DO_UONG - nvarchar(250)
+			    1,   -- MA_LOAI_DO_UONG - int
+			    0 -- ISDELETED - bit
+			    )

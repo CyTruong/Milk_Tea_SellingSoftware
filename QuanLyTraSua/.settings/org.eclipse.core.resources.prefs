@@ -1,5 +1,11 @@
 eclipse.preferences.version=1
 encoding//src/bus/PickTableBus.java=UTF-8
+encoding//src/bus/printer/ReportCat_Invoice.java=UTF-8
 encoding//src/dal/iQLTS_Procedure.java=UTF-8
+encoding//src/gui/NhantienDialog.java=UTF-8
+encoding//src/gui/OrderFrame.java=UTF-8
 encoding//src/gui/PickTableFrame.java=UTF-8
+encoding//src/gui/ThemDoUongDialog.java=UTF-8
+encoding//src/gui/ThemLoaiDoUongDialog.java=UTF-8
+encoding//src/gui/ThemNhanVienDialog.java=UTF-8
 encoding//src/test/test.java=UTF-8
