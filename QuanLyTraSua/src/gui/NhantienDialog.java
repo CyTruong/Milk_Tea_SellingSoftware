@@ -178,6 +178,11 @@ public class NhantienDialog extends JDialog {
 		JButton btconfrim = new JButton("confirm");
 		btconfrim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(Tiennhan < Tongtien) {
+					ToastMessage toast = new ToastMessage("Chưa nhận đủ tiền", 3000);
+					toast.setVisible(true);	
+					return;
+				}
 				new Thread() {
 				public void run() {
 					PurchaseBus.getInstance().creatnewOrder();
@@ -194,6 +199,7 @@ public class NhantienDialog extends JDialog {
 				
 				ToastMessage toast = new ToastMessage("Thanh toán thành công", 3000);
 				toast.setVisible(true);	
+				dispose();
 			}
 		});
 		btconfrim.setBounds(436, 368, 173, 97);

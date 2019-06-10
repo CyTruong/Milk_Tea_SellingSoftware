@@ -122,7 +122,7 @@ public class PrintPreview extends JPanel implements ActionListener {
     // the following operation causes the application to exit when
     // the user closes the print preview.Please uncoment it when you want
     // that the application should continue running 
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.toFront();
     return frame;
   }

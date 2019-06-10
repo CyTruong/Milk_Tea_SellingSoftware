@@ -67,8 +67,6 @@ public class MenuFrame extends JFrame {
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	int h = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 6);
 	int w = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 9);
-//	int h = 50;
-//	int w = 45;
 	gridBagLayout.columnWidths = new int[]{w, w, w, w, w, w, w, w, 223, 0};
 	gridBagLayout.rowHeights = new int[]{h, h, h, h, h, h, 0};
 	gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -91,9 +89,9 @@ public class MenuFrame extends JFrame {
 	btnBanhang.setFont(new Font("Segoe UI", Font.BOLD, 34));
 	btnBanhang.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			PickTableFrame frame = new PickTableFrame();
-			frame.setVisible(true);
-			frame.setFocusable(true);
+			OrderFrame frameorder = new OrderFrame();
+			frameorder.setVisible(true);
+			frameorder.setFocusable(true);
 			dispose();
 		}
 	});

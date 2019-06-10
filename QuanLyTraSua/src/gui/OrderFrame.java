@@ -73,6 +73,7 @@ public class OrderFrame extends JFrame {
 
 	@SuppressWarnings("serial")
 	public OrderFrame() {
+		setUndecorated(true);
 		arrLoaidouongDto = new ArrayList<LoaidouongDto>();
 		arrLoaidouongDto = LoaidouongBus.getInstance().getListDto();
 		arrOrder = new ArrayList<>();

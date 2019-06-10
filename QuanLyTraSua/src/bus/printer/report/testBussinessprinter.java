@@ -16,11 +16,11 @@ public class testBussinessprinter {
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		
 	
-		Timestamp timefrom = Timestamp.valueOf("2019-06-06 10:10:10.0");
+		Timestamp timefrom = Timestamp.valueOf("2019-06-09 10:10:10.0");
 		
-		Object[] arg = {timefrom,time};
+		Object[] arg = {timefrom};
 		
-		Printer_Controler.getInstance().getModule().createBussinessReport(new ReportCat_Business_FromTo(arg));
+		Printer_Controler.getInstance().getModule().createBussinessReport(new ReportCat_Businness_Byday(arg));
 		Printer_Controler.getInstance().getModule().showReport();
 	}
 

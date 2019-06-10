@@ -130,7 +130,7 @@ class RpTableModel implements TableDataModel{
 	@Override
 	public Object getFooterAt(int arg0) {
 		if (arg0 == 0) {
-			return "Tổng";
+			return "Tá»•ng";
 		}
 		if (arg0 == 2) {
 

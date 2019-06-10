@@ -24,7 +24,7 @@ public class ReportCat_Business_Byweek extends ReportCat_Business {
 	protected Print getTittle() {
 		Timestamp timestamp = (Timestamp) _arg[0];
 		int day = timestamp.getDay() / 4;
-		TextPrint tp = new TextPrint("Báo cáo doanh thu tuần thứ "+day+" trong tháng " + new SimpleDateFormat("MM/yyy").format(timestamp));
+		TextPrint tp = new TextPrint("Báo cáo doanh thu tuần "+(day+1)+" trong tháng " + new SimpleDateFormat("MM/yyy").format(timestamp));
 		tp.setHorizontalAlignment(JLabel.CENTER);
 		return tp;
 	}

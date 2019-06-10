@@ -38,7 +38,7 @@ public class ToastMessage extends JDialog {
         int half = y/2;
         setLocation(dim.width/2-getSize().width/2, y+half);
         panel.add(toastLabel);
-        setVisible(false);
+        //setVisible(false);
 
         new Thread(){
             public void run() {

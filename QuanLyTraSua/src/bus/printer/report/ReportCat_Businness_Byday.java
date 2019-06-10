@@ -23,7 +23,8 @@ public class ReportCat_Businness_Byday extends ReportCat_Business {
 	@Override
 	protected Print getTittle() {
 		Timestamp timestamp = (Timestamp) _arg[0];
-		TextPrint tp = new TextPrint("B√°o c√°o doanh thu ng√†y : " + new SimpleDateFormat("dd/MM/yyy").format(timestamp));
+		System.out.println(timestamp.toString());
+		TextPrint tp = new TextPrint("B·o c·o doanh thu ng‡y : " + new SimpleDateFormat("dd/MM/yyy").format(timestamp));
 		tp.setHorizontalAlignment(JLabel.CENTER);
 		return tp;
 	}
