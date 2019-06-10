@@ -5,9 +5,9 @@ import java.sql.SQLException;
 
 public class BanggiaDto extends baseDto{
 	
-	public int size;
-	public int madouong;
-	public int giatien;
+	public int size=0;
+	public int madouong=0;
+	public int giatien=0;
 
 	public BanggiaDto() {
 	}

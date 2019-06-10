@@ -23,7 +23,7 @@ public interface iQLTS_Procedure {
 	public boolean insertBanggia(int size,int madouong,int giatien);
 	public ResultSet selectBanggia();
 	public ResultSet selectBanggia(int size,int madouong);
-	public boolean updateLoaiDoUong(int size,int madouong,int giatien);
+	public boolean updateBanggia(int size,int madouong,int giatien);
 	
 	public boolean deleteChitiethoadon(int macthd);
 	//topping char(256)

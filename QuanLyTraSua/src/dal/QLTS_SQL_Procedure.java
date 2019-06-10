@@ -173,7 +173,7 @@ public class QLTS_SQL_Procedure extends QLTS_DB implements iQLTS_Procedure {
 	}
 
 	@Override
-	public boolean updateLoaiDoUong(int size, int madouong, int giatien) {
+	public boolean updateBanggia(int size, int madouong, int giatien) {
 		try {
 			callableStatement = connection.prepareCall("{call BANG_GIA_UPDATEPROCEDURE(?,?,?,?)}");
 			callableStatement.setInt(1, size);
