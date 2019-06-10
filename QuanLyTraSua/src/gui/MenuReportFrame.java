@@ -31,11 +31,14 @@ import bus.printer.Printer_Controler;
 import bus.printer.report.*;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import java.awt.SystemColor;
 
 public class MenuReportFrame extends JFrame {
 
 	private JPanel contentPane;
 	private Timestamp tuanchon;
+	private Timestamp tsfrom = null;
+	private Timestamp tsto = null;
 
 	/**
 	 * Launch the application.
@@ -57,27 +60,32 @@ public class MenuReportFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuReportFrame() {
+		setResizable(false);
+		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(0, 0, 1445, 877);
+		setBounds(0, 0, 1920, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 154, 0));
 		panel.setBounds(0, 0, 1920, 1080);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		JPanel leftpanel = new JPanel();
-		leftpanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		leftpanel.setBackground(new Color(255, 154, 15));
+		leftpanel.setBorder(null);
 		leftpanel.setBounds(0, 0, 960, 1080);
 		panel.add(leftpanel);
 		leftpanel.setLayout(null);
 
 		JLabel lblThngKDoanh = new JLabel("Th\u1ED1ng k\u00EA doanh thu theo th\u1EDDi gian");
+		lblThngKDoanh.setForeground(new Color(150, 0, 0));
 		lblThngKDoanh.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblThngKDoanh.setFont(new Font("Arial", Font.BOLD, 22));
+		lblThngKDoanh.setFont(new Font("Segoe UI", Font.BOLD, 34));
 		lblThngKDoanh.setHorizontalAlignment(SwingConstants.CENTER);
 		lblThngKDoanh.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblThngKDoanh.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -86,18 +94,19 @@ public class MenuReportFrame extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(28, 107, 481, 285);
+		panel_1.setBounds(28, 125, 430, 300);
 		leftpanel.add(panel_1);
 		panel_1.setLayout(null);
 
 		JLabel lblThngKTheo = new JLabel("Th\u1ED1ng k\u00EA theo ng\u00E0y");
-		lblThngKTheo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblThngKTheo.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		lblThngKTheo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblThngKTheo.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblThngKTheo.setBounds(0, 11, 471, 36);
+		lblThngKTheo.setBounds(-41, 35, 471, 36);
 		panel_1.add(lblThngKTheo);
 
 		JButton btnNgyHmNay = new JButton("Ng\u00E0y h\u00F4m nay");
+		btnNgyHmNay.setBackground(SystemColor.menu);
 		btnNgyHmNay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Timestamp time = new Timestamp(System.currentTimeMillis());
@@ -106,11 +115,12 @@ public class MenuReportFrame extends JFrame {
 				Printer_Controler.getInstance().getModule().showReport();
 			}
 		});
-		btnNgyHmNay.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNgyHmNay.setBounds(32, 91, 173, 158);
+		btnNgyHmNay.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		btnNgyHmNay.setBounds(32, 136, 173, 99);
 		panel_1.add(btnNgyHmNay);
 
 		JButton btChooseNgay = new JButton("Ch\u1ECDn ng\u00E0y");
+		btChooseNgay.setBackground(SystemColor.menu);
 		btChooseNgay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Component component = (Component) e.getSource();
@@ -125,38 +135,41 @@ public class MenuReportFrame extends JFrame {
 			}
 		});
 
-		btChooseNgay.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btChooseNgay.setBounds(264, 91, 173, 158);
+		btChooseNgay.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		btChooseNgay.setBounds(231, 136, 173, 99);
 		panel_1.add(btChooseNgay);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_2.setBounds(519, 263, 431, 292);
+		panel_2.setBounds(520, 305, 430, 300);
 		leftpanel.add(panel_2);
 		panel_2.setLayout(null);
 
 		JLabel label = new JLabel("Th\u1ED1ng k\u00EA theo th\u00E1ng");
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		label.setBounds(10, 11, 389, 30);
+		label.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		label.setBounds(29, 13, 389, 30);
 		panel_2.add(label);
 
 		JSpinner SpMonth = new JSpinner();
+		SpMonth.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		SpMonth.setModel(new SpinnerNumberModel(1, 1, 12, 1));
-		SpMonth.setBounds(102, 108, 319, 50);
+		SpMonth.setBounds(137, 114, 242, 38);
 		SpMonth.getComponent(0).setPreferredSize(new Dimension(50, 25));
 		SpMonth.getComponent(1).setPreferredSize(new Dimension(50, 25));
 		SpMonth.getComponent(2).setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 		panel_2.add(SpMonth);
 
-		JLabel lblChnThnag = new JLabel("Th\u00E1ng");
-		lblChnThnag.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblChnThnag.setBounds(10, 118, 64, 27);
+		JLabel lblChnThnag = new JLabel("Tháng:");
+		lblChnThnag.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblChnThnag.setBounds(48, 119, 64, 27);
 		panel_2.add(lblChnThnag);
 
 		JButton btnbymonth = new JButton("Xem");
+		btnbymonth.setForeground(Color.WHITE);
+		btnbymonth.setBackground(new Color(150, 0, 0));
 		btnbymonth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int month = (int) SpMonth.getValue();
@@ -166,34 +179,36 @@ public class MenuReportFrame extends JFrame {
 				Printer_Controler.getInstance().getModule().showReport();
 			}
 		});
-		btnbymonth.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnbymonth.setBounds(23, 206, 376, 59);
+		btnbymonth.setFont(new Font("Segoe UI", Font.BOLD, 28));
+		btnbymonth.setBounds(26, 196, 376, 59);
 		panel_2.add(btnbymonth);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_3.setBounds(28, 463, 466, 297);
+		panel_3.setBounds(28, 485, 430, 300);
 		leftpanel.add(panel_3);
 		panel_3.setLayout(null);
 
 		JLabel lblThngKTheo_1 = new JLabel("Th\u1ED1ng k\u00EA theo tu\u1EA7n");
 		lblThngKTheo_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblThngKTheo_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblThngKTheo_1.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		lblThngKTheo_1.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblThngKTheo_1.setBounds(10, 11, 450, 40);
+		lblThngKTheo_1.setBounds(-32, 32, 450, 40);
 		panel_3.add(lblThngKTheo_1);
 
 		JLabel label_1 = new JLabel("Ch\u1ECDn ng\u00E0y trong tu\u1EA7n");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_1.setBounds(23, 85, 172, 40);
+		label_1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		label_1.setBounds(23, 85, 192, 40);
 		panel_3.add(label_1);
 
 		JLabel lbngaychon = new JLabel("Ng\u00E0y ch\u1ECDn :");
-		lbngaychon.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbngaychon.setBounds(25, 159, 416, 40);
+		lbngaychon.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lbngaychon.setBounds(23, 147, 395, 40);
 		panel_3.add(lbngaychon);
 
 		JButton btnChontuan = new JButton("Ch\u1ECDn tu\u1EA7n");
+		btnChontuan.setBackground(SystemColor.menu);
+		btnChontuan.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		btnChontuan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Component component = (Component) arg0.getSource();
@@ -209,6 +224,8 @@ public class MenuReportFrame extends JFrame {
 		panel_3.add(btnChontuan);
 
 		JButton btbyweek = new JButton("Xem báo cáo");
+		btbyweek.setForeground(Color.WHITE);
+		btbyweek.setBackground(new Color(150, 0, 0));
 		btbyweek.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Object[] arg = { tuanchon };
@@ -216,36 +233,39 @@ public class MenuReportFrame extends JFrame {
 				Printer_Controler.getInstance().getModule().showReport();
 			}
 		});
-		btbyweek.setFont(new Font("Arial", Font.PLAIN, 20));
-		btbyweek.setBounds(106, 222, 192, 64);
+		btbyweek.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		btbyweek.setBounds(110, 200, 226, 64);
 		panel_3.add(btbyweek);
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_4.setBounds(508, 589, 431, 285);
+		panel_4.setBounds(520, 659, 430, 300);
 		leftpanel.add(panel_4);
 
 		JLabel label_2 = new JLabel("Th\u1ED1ng k\u00EA theo n\u0103m");
 		label_2.setHorizontalTextPosition(SwingConstants.CENTER);
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		label_2.setBounds(10, 11, 411, 30);
+		label_2.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		label_2.setBounds(10, 11, 411, 38);
 		panel_4.add(label_2);
 
-		JLabel label_3 = new JLabel("N\u0103m");
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_3.setBounds(10, 95, 64, 27);
-		panel_4.add(label_3);
+		JLabel lblNm = new JLabel("Năm:");
+		lblNm.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblNm.setBounds(67, 93, 64, 27);
+		panel_4.add(lblNm);
 
 		JSpinner Spyear = new JSpinner();
+		Spyear.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		Spyear.setModel(new SpinnerNumberModel(2019, 1990, 2200, 1));
-		Spyear.setBounds(102, 82, 319, 50);
+		Spyear.setBounds(124, 88, 238, 38);
 		panel_4.add(Spyear);
 
 		JButton btxemtheonam = new JButton("Xem");
-		btxemtheonam.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btxemtheonam.setBounds(10, 178, 411, 59);
+		btxemtheonam.setForeground(Color.WHITE);
+		btxemtheonam.setBackground(new Color(150, 0, 0));
+		btxemtheonam.setFont(new Font("Segoe UI", Font.BOLD, 28));
+		btxemtheonam.setBounds(27, 178, 371, 59);
 		btxemtheonam.addActionListener(new ActionListener() {
 			
 			@Override
@@ -260,61 +280,130 @@ public class MenuReportFrame extends JFrame {
 		panel_4.add(btxemtheonam);
 
 		JPanel rightpanel = new JPanel();
+		rightpanel.setBackground(new Color(255, 255, 153));
 		rightpanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		rightpanel.setBounds(960, 0, 960, 595);
 		panel.add(rightpanel);
 		rightpanel.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Th\u1ED1ng k\u00EA theo nh\u00E2n vi\u00EAn");
+		lblNewLabel.setForeground(new Color(150, 0, 0));
+		lblNewLabel.setBackground(new Color(255, 154, 15));
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 22));
+		lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
 		lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lblNewLabel.setBounds(10, 11, 940, 53);
 		rightpanel.add(lblNewLabel);
 
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_5.setBounds(56, 103, 315, 429);
+		panel_5.setBounds(203, 117, 532, 429);
 		rightpanel.add(panel_5);
 		panel_5.setLayout(null);
 
 		JLabel label_4 = new JLabel("Th\u1ED1ng k\u00EA theo t\u1ED5ng doanh thu");
 		label_4.setHorizontalTextPosition(SwingConstants.CENTER);
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		label_4.setBounds(10, 23, 295, 30);
+		label_4.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		label_4.setBounds(139, 24, 295, 30);
 		panel_5.add(label_4);
 
 		JList list = new JList();
-		list.setBounds(10, 114, 295, 202);
+		list.setBounds(10, 114, 510, 202);
 		panel_5.add(list);
 
 		JButton btnNewButton = new JButton("Xem");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(10, 343, 295, 64);
+		btnNewButton.setBackground(new Color(150, 0, 0));
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setFont(new Font("Segoe UI", Font.BOLD, 28));
+		btnNewButton.setBounds(139, 339, 295, 64);
 		panel_5.add(btnNewButton);
 
-		JLabel lblChnNhnVin = new JLabel("Ch\u1ECDn nh\u00E2n vi\u00EAn");
-		lblChnNhnVin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblChnNhnVin.setBounds(10, 73, 123, 30);
+		JLabel lblChnNhnVin = new JLabel("Chọn nhân viên:");
+		lblChnNhnVin.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblChnNhnVin.setBounds(10, 73, 141, 30);
 		panel_5.add(lblChnNhnVin);
 		
 		JButton btnBack = new JButton("Quay lại");
-		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnBack.setBounds(1062, 630, 256, 79);
+		btnBack.setForeground(Color.WHITE);
+		btnBack.setBackground(new Color(150, 0, 0));
+		btnBack.setFont(new Font("Segoe UI", Font.BOLD, 28));
+		btnBack.setBounds(1619, 977, 256, 79);
 		panel.add(btnBack);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setLayout(null);
+		panel_6.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_6.setBounds(1106, 664, 478, 300);
+		panel.add(panel_6);
+		
+		JLabel lblThngKTheo_2 = new JLabel("Thống kê theo ngày bất kì");
+		lblThngKTheo_2.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblThngKTheo_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblThngKTheo_2.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblThngKTheo_2.setBounds(62, 13, 347, 40);
+		panel_6.add(lblThngKTheo_2);
+		
+		JLabel lbfrom = new JLabel("Ngày bắt đầu:");
+		lbfrom.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lbfrom.setBounds(23, 85, 275, 40);
+		panel_6.add(lbfrom);
+		
+		JLabel lbto = new JLabel("Ngày kết thúc: ");
+		lbto.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lbto.setBounds(23, 135, 275, 40);
+		panel_6.add(lbto);
+		
+		JButton btfrom = new JButton("Chọn ngày");
+		btfrom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Component component = (Component) arg0.getSource();
+				DatePicker dp = new DatePicker((JFrame) SwingUtilities.getRoot(component));
+				Point bP = btChooseNgay.getLocationOnScreen();
+				dp.d.setLocation(bP.x, bP.y + btChooseNgay.getHeight());
+				dp.d.setVisible(true);
+				tsfrom = dp.setPickedDateTimetamp();
+				lbfrom.setText("Ngày bắt đầu "+(new SimpleDateFormat("dd/MM/yyy").format(tsfrom)));
+			}
+		});
+		btfrom.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		btfrom.setBackground(SystemColor.menu);
+		btfrom.setBounds(300, 79, 142, 43);
+		panel_6.add(btfrom);
+		
+		JButton btrpfromto = new JButton("Xem báo cáo");
+		btrpfromto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object[] arg = {tsfrom,tsto};
+				
+				Printer_Controler.getInstance().getModule().createBussinessReport(new ReportCat_Business_FromTo(arg));
+				Printer_Controler.getInstance().getModule().showReport();
+			}
+		});
+		btrpfromto.setForeground(Color.WHITE);
+		btrpfromto.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		btrpfromto.setBackground(new Color(150, 0, 0));
+		btrpfromto.setBounds(136, 196, 192, 64);
+		panel_6.add(btrpfromto);
+		
+		JButton btto = new JButton("Chọn ngày");
+		btto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Component component = (Component) arg0.getSource();
+				DatePicker dp = new DatePicker((JFrame) SwingUtilities.getRoot(component));
+				Point bP = btChooseNgay.getLocationOnScreen();
+				dp.d.setLocation(bP.x, bP.y + btChooseNgay.getHeight());
+				dp.d.setVisible(true);
+				tsto = dp.setPickedDateTimetamp();
+				lbto.setText("Ngày kết thúc "+(new SimpleDateFormat("dd/MM/yyy").format(tsto)));
+			}
+		});
+		btto.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		btto.setBackground(SystemColor.menu);
+		btto.setBounds(300, 134, 142, 43);
+		panel_6.add(btto);
 	}
-
-	@Override
-	public void dispose() {
-		MenuReportFrame menu = new MenuReportFrame();
-		menu.setVisible(true);
-		super.dispose();
-	}
-	
-	
-	
 }
 
 class DatePicker {

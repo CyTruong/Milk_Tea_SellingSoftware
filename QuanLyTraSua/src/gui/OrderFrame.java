@@ -32,6 +32,7 @@ import dto.Douongdto;
 import dto.LoaidouongDto;
 import dto.ToppingDto;
 import gui.chooseSizeDialog.iChooseSizeFinish;
+import java.awt.SystemColor;
 
 public class OrderFrame extends JFrame {
 
@@ -122,7 +123,7 @@ public class OrderFrame extends JFrame {
 			}
 		});
 		btnLen1.setForeground(Color.WHITE);
-		btnLen1.setBackground(new Color(244, 164, 96));
+		btnLen1.setBackground(new Color(255, 154, 15));
 		btnLen1.setLocation(393, 588);
 		btnLen1.setSize(135, 70);
 		getContentPane().add(btnLen1);
@@ -142,13 +143,21 @@ public class OrderFrame extends JFrame {
 			}
 		});
 		btnXuong1.setForeground(Color.WHITE);
-		btnXuong1.setBackground(new Color(244, 164, 96));
+		btnXuong1.setBackground(new Color(255, 154, 15));
 		btnXuong1.setLocation(396, 960);
 		btnXuong1.setSize(135, 70);
 		getContentPane().add(btnXuong1);
 
 		ImageIcon home = new ImageIcon("images/home.png");
 		btnTrangChu = new JButton("  " + "Trang chủ");
+		btnTrangChu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuFrame menuframe = new MenuFrame();
+				menuframe.setVisible(true);
+				menuframe.setFocusable(true);
+				dispose();
+			}
+		});
 		btnTrangChu.setIcon(home);
 		btnTrangChu.setForeground(Color.WHITE);
 		btnTrangChu.setFont(new Font("Segoe UI", Font.BOLD, 24));
@@ -159,7 +168,7 @@ public class OrderFrame extends JFrame {
 		JLabel lblTheLoai = new JLabel("Thể loại");
 		lblTheLoai.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTheLoai.setForeground(new Color(204, 0, 0));
-		lblTheLoai.setBackground(new Color(204, 0, 0));
+		lblTheLoai.setBackground(new Color(255,154, 15));
 		lblTheLoai.setFont(new Font("Segoe UI", Font.BOLD, 34));
 		lblTheLoai.setBounds(176, 529, 148, 46);
 		getContentPane().add(lblTheLoai);
@@ -168,7 +177,7 @@ public class OrderFrame extends JFrame {
 		lblDanhSch.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDanhSch.setForeground(new Color(204, 0, 0));
 		lblDanhSch.setFont(new Font("Segoe UI", Font.BOLD, 34));
-		lblDanhSch.setBackground(new Color(204, 0, 0));
+		lblDanhSch.setBackground(new Color(255,154, 15));
 		lblDanhSch.setBounds(554, 529, 327, 46);
 		getContentPane().add(lblDanhSch);
 
@@ -176,7 +185,7 @@ public class OrderFrame extends JFrame {
 		lbTongTien.setHorizontalAlignment(SwingConstants.LEFT);
 		lbTongTien.setForeground(new Color(204, 0, 0));
 		lbTongTien.setFont(new Font("Segoe UI", Font.BOLD, 34));
-		lbTongTien.setBackground(new Color(204, 0, 0));
+		lbTongTien.setBackground(new Color(255,154, 15));
 		lbTongTien.setBounds(93, 47, 187, 46);
 		getContentPane().add(lbTongTien);
 
@@ -246,7 +255,7 @@ public class OrderFrame extends JFrame {
 		btnTopping = new JButton("Topping");
 		btnTopping.setForeground(Color.WHITE);
 		btnTopping.setFont(new Font("Segoe UI", Font.BOLD, 30));
-		btnTopping.setBackground(new Color(166, 98, 5));
+		btnTopping.setBackground(new Color(255, 65, 0));
 		btnTopping.setBounds(93, 930, 300, 100);
 		btnTopping.addActionListener(new ActionListener() {
 
@@ -262,7 +271,7 @@ public class OrderFrame extends JFrame {
 		pnDanhSachDoUong.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		pnDanhSachDoUong.setBounds(540, 588, 789, 441);
 		getContentPane().add(pnDanhSachDoUong);
-		pnDanhSachDoUong.setBackground(new Color(191, 134, 56));
+		pnDanhSachDoUong.setBackground(SystemColor.control);
 		pnDanhSachDoUong.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		ImageIcon print = new ImageIcon("images/printer.png");
@@ -298,13 +307,13 @@ public class OrderFrame extends JFrame {
 			}
 		});
 		btnLen.setForeground(Color.WHITE);
-		btnLen.setBackground(new Color(244, 164, 96));
+		btnLen.setBackground(new Color(255, 154, 15));
 		btnLen.setBounds(1364, 588, 135, 70);
 		getContentPane().add(btnLen);
 
 		btnXuong = new JButton(icon1);
 		btnXuong.setForeground(Color.WHITE);
-		btnXuong.setBackground(new Color(244, 164, 96));
+		btnXuong.setBackground(new Color(255, 154, 15));
 		btnXuong.setBounds(1364, 960, 135, 70);
 		getContentPane().add(btnXuong);
 
@@ -435,9 +444,9 @@ class DoUongButton extends JButton implements ActionListener {
 	private Douongdto _dto;
 
 	public DoUongButton() {
-		this.setFont(new Font("Segoe UI", Font.BOLD, 28));
+		this.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		this.setBackground(new Color(204, 0, 0));
-		this.setPreferredSize(new Dimension(190, 90));
+		this.setPreferredSize(new Dimension(255, 90));
 		this.setForeground(Color.white);
 		this.addActionListener(this);
 	}
@@ -470,9 +479,9 @@ class ToppingButton extends JButton implements ActionListener {
 	private ToppingDto _dto;
 
 	public ToppingButton() {
-		this.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		this.setBackground(new Color(244, 200, 66));
-		this.setPreferredSize(new Dimension(190, 90));
+		this.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		this.setBackground(new Color(204, 0, 0));
+		this.setPreferredSize(new Dimension(255, 90));
 		this.setForeground(Color.white);
 		this.addActionListener(this);
 	}

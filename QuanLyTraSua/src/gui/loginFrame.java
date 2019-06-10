@@ -31,6 +31,7 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.SystemColor;
+import javax.swing.DropMode;
 
 public class loginFrame extends JFrame {
 
@@ -70,23 +71,23 @@ public class loginFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 320, 292);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(244, 164, 96));
+		contentPane.setBackground(new Color(255, 154, 15));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		tfUsername = new JTextField();
 		tfUsername.setColumns(10);
-		tfUsername.setBackground(new Color(244, 164, 96));
-		tfUsername.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		tfUsername.setBounds(131, 84, 143, 23);
+		tfUsername.setBackground(new Color(255,154, 15));
+		tfUsername.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		tfUsername.setBounds(131, 67, 143, 40);
 		contentPane.add(tfUsername);
 		
 		JButton btLogin = new JButton("\u0110\u0103ng nh\u1EADp");
 		btLogin.setBackground(new Color(204, 0, 0));
-		btLogin.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		btLogin.setFont(new Font("Segoe UI", Font.BOLD, 16));
 		btLogin.setHorizontalTextPosition(SwingConstants.CENTER);
-		btLogin.setForeground(Color.BLACK);
+		btLogin.setForeground(Color.WHITE);
 		btLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				LoginBus login = new LoginBus(tfUsername.getText(),new String(tfPass.getPassword()));
@@ -113,22 +114,24 @@ public class loginFrame extends JFrame {
 		
 		JLabel lblTiKhon = new JLabel("T\u00E0i kho\u1EA3n");
 		lblTiKhon.setForeground(new Color(204, 0, 0));
-		lblTiKhon.setBackground(new Color(244, 164, 96));
-		lblTiKhon.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblTiKhon.setBackground(new Color(255, 154, 16));
+		lblTiKhon.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblTiKhon.setBounds(20, 84, 79, 23);
 		contentPane.add(lblTiKhon);
 		
 		JLabel lblMtKhu = new JLabel("M\u1EADt kh\u1EA9u");
 		lblMtKhu.setForeground(new Color(204, 0, 0));
-		lblMtKhu.setBackground(new Color(244, 164, 96));
-		lblMtKhu.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblMtKhu.setBackground(new Color(255, 154, 15));
+		lblMtKhu.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblMtKhu.setBounds(20, 137, 79, 19);
 		contentPane.add(lblMtKhu);
 		
 		tfPass = new JPasswordField();
+		tfPass.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		tfPass.setColumns(10);
 		tfPass.setBackground(SystemColor.text);
 		tfPass.setEchoChar('*');
-		tfPass.setBounds(131, 136, 143, 20);
+		tfPass.setBounds(131, 120, 143, 39);
 		contentPane.add(tfPass);
 		
 		loadDrinkingTableContent();

@@ -52,13 +52,13 @@ public class ThemDoUongDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public ThemDoUongDialog() {
-		getContentPane().setBackground(new Color(244,164,96));
+		getContentPane().setBackground(new Color(255,154,15));
 		setUndecorated(true);
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setBounds(100, 100, 696, 542);
 		getContentPane().setLayout(null);
-		contentPanel.setBackground(new Color(244,164,96));
+		contentPanel.setBackground(new Color(255,154,15));
 		contentPanel.setBounds(12, 13, 670, 492);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);

@@ -39,7 +39,7 @@ public class ThemToppingDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public ThemToppingDialog() {
-		getContentPane().setBackground(new Color(244,164,96));
+		getContentPane().setBackground(new Color(255,154,15));
 		setBounds(100, 100, 593, 432);
 		getContentPane().setLayout(null);
 		
@@ -123,7 +123,7 @@ public class ThemToppingDialog extends JDialog {
             	QLTS_DatabaseControler.getInstance().getProcedures().insertTopping(tften.getText(), giatien);
             }
         }.start();
-        ToastMessage toast = new ToastMessage("Th�m topping th�nh c�ng", 3000);
+        ToastMessage toast = new ToastMessage("Thêm topping thành công", 3000);
         toast.setVisible(true);
         dispose();
 	}

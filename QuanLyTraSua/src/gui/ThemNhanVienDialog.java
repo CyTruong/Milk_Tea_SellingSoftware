@@ -56,7 +56,7 @@ public class ThemNhanVienDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public ThemNhanVienDialog() {
-		getContentPane().setBackground(new Color(255, 164, 96));
+		getContentPane().setBackground(new Color(255, 154, 15));
 		setUndecorated(true);
 		setResizable(false);
 		setAlwaysOnTop(true);
@@ -65,7 +65,7 @@ public class ThemNhanVienDialog extends JDialog {
 		
 		setBounds(100, 100, 879, 691);
 		getContentPane().setLayout(null);
-		panel.setBackground(new Color(255, 164, 96));
+		panel.setBackground(new Color(255, 154, 15));
 		panel.setBounds(0, 13, 853, 641);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panel);

@@ -62,9 +62,10 @@ public class NhantienDialog extends JDialog {
 		this.arg = arg;
 		setBounds(100, 100, 657, 532);
 		getContentPane().setLayout(null);
-		getContentPane().setBackground(new Color(255,199,80));
+		getContentPane().setBackground(new Color(255,154,15));
 	
 		JButton bt1k = new JButton("1 000");
+		bt1k.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		bt1k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tiennhan+=1000;
@@ -75,17 +76,20 @@ public class NhantienDialog extends JDialog {
 		getContentPane().add(bt1k);
 		
 		lbtongcong = new JLabel("lbtongcong");
-		lbtongcong.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lbtongcong.setForeground(new Color(204, 0, 0));
+		lbtongcong.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		lbtongcong.setBounds(10, 362, 212, 27);
 		getContentPane().add(lbtongcong);
 		
 		lbtiennhan = new JLabel("lbtiennhan");
-		lbtiennhan.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lbtiennhan.setForeground(new Color(204,0, 0));
+		lbtiennhan.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		lbtiennhan.setBounds(10, 400, 212, 27);
 		lbtiennhan.setText("Tiền nhận : "+ Tiennhan);
 		getContentPane().add(lbtiennhan);
 		
 		JButton button = new JButton("2 000");
+		button.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tiennhan+=2000;
@@ -96,6 +100,7 @@ public class NhantienDialog extends JDialog {
 		getContentPane().add(button);
 		
 		JButton bt10k = new JButton("10 000");
+		bt10k.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		bt10k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tiennhan+=10000;
@@ -106,6 +111,7 @@ public class NhantienDialog extends JDialog {
 		getContentPane().add(bt10k);
 		
 		JButton bt20k = new JButton("20 000");
+		bt20k.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		bt20k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tiennhan+=20000;
@@ -116,6 +122,7 @@ public class NhantienDialog extends JDialog {
 		getContentPane().add(bt20k);
 		
 		JButton bt100k = new JButton("100 000");
+		bt100k.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		bt100k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tiennhan+=100000;
@@ -126,6 +133,7 @@ public class NhantienDialog extends JDialog {
 		getContentPane().add(bt100k);
 		
 		JButton bt200k = new JButton("200 000");
+		bt200k.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		bt200k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tiennhan+=200000;
@@ -136,6 +144,7 @@ public class NhantienDialog extends JDialog {
 		getContentPane().add(bt200k);
 		
 		JButton bt5k = new JButton("5 000");
+		bt5k.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		bt5k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tiennhan+=5000;
@@ -146,6 +155,7 @@ public class NhantienDialog extends JDialog {
 		getContentPane().add(bt5k);
 		
 		JButton bt50k = new JButton("50 000");
+		bt50k.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		bt50k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tiennhan+=50000;
@@ -156,6 +166,7 @@ public class NhantienDialog extends JDialog {
 		getContentPane().add(bt50k);
 		
 		JButton bt500k = new JButton("500 000");
+		bt500k.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		bt500k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tiennhan+=500000;
@@ -165,7 +176,10 @@ public class NhantienDialog extends JDialog {
 		bt500k.setBounds(498, 268, 111, 89);
 		getContentPane().add(bt500k);
 		
-		JButton btclear = new JButton("clear");
+		JButton btclear = new JButton("Xóa");
+		btclear.setForeground(Color.WHITE);
+		btclear.setBackground(new Color(204, 0, 0));
+		btclear.setFont(new Font("Segoe UI", Font.BOLD, 28));
 		btclear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tiennhan = 0;
@@ -175,7 +189,10 @@ public class NhantienDialog extends JDialog {
 		btclear.setBounds(252, 369, 174, 100);
 		getContentPane().add(btclear);
 		
-		JButton btconfrim = new JButton("confirm");
+		JButton btconfrim = new JButton("Xác nhận");
+		btconfrim.setForeground(Color.WHITE);
+		btconfrim.setBackground(new Color(204, 0, 0));
+		btconfrim.setFont(new Font("Segoe UI", Font.BOLD, 28));
 		btconfrim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Tiennhan < Tongtien) {
@@ -206,16 +223,18 @@ public class NhantienDialog extends JDialog {
 		getContentPane().add(btconfrim);
 		
 		labtienthoi = new JLabel("lbtongcong");
-		labtienthoi.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		labtienthoi.setForeground(new Color(204, 0, 0));
+		labtienthoi.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		labtienthoi.setBounds(10, 438, 212, 27);
 		labtienthoi.setText("Tiền thối  : "+ (Tiennhan-Tongtien));
 		getContentPane().add(labtienthoi);
 		
 		JLabel lblTinNhn = new JLabel("Ti\u1EC1n nh\u1EADn");
-		lblTinNhn.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTinNhn.setForeground(new Color(204, 0, 0));
+		lblTinNhn.setFont(new Font("Segoe UI", Font.BOLD, 34));
 		lblTinNhn.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTinNhn.setBounds(252, 22, 366, 27);
-		lblTinNhn.setBackground(new Color(255,199,80));
+		lblTinNhn.setBounds(252, 13, 366, 47);
+		lblTinNhn.setBackground(new Color(255,154,15));
 		getContentPane().add(lblTinNhn);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -225,7 +244,7 @@ public class NhantienDialog extends JDialog {
 		panel = new JPanel();
 		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel.setBounds(10, 22, 223, 332);
-		panel.setBackground(new Color(255,199,123));
+		panel.setBackground(new Color(255, 255, 102));
 		getContentPane().add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		

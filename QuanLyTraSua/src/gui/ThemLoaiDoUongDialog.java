@@ -40,14 +40,14 @@ public class ThemLoaiDoUongDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public ThemLoaiDoUongDialog() {
-		getContentPane().setBackground(new Color(255, 164, 96));
+		getContentPane().setBackground(new Color(255, 154, 15));
 		setUndecorated(true);
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 660, 384);
 		getContentPane().setLayout(null);
-		contentPanel.setBackground(new Color(244, 164, 96));
+		contentPanel.setBackground(new Color(255, 154, 15));
 		contentPanel.setBounds(0, 0, 651, 409);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
