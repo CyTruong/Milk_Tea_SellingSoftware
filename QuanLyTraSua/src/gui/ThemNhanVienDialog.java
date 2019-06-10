@@ -28,6 +28,7 @@ import java.awt.Font;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ThemNhanVienDialog extends JDialog {
 
@@ -55,6 +56,7 @@ public class ThemNhanVienDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public ThemNhanVienDialog() {
+		getContentPane().setBackground(new Color(255, 164, 96));
 		setUndecorated(true);
 		setResizable(false);
 		setAlwaysOnTop(true);
@@ -63,67 +65,83 @@ public class ThemNhanVienDialog extends JDialog {
 		
 		setBounds(100, 100, 879, 691);
 		getContentPane().setLayout(null);
-		panel.setBounds(0, 0, 853, 641);
+		panel.setBackground(new Color(255, 164, 96));
+		panel.setBounds(0, 13, 853, 641);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lbThemnhanvien = new JLabel("Th\u00EAm nh\u00E2n vi\u00EAn");
-		lbThemnhanvien.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
+		lbThemnhanvien.setForeground(new Color(204, 0, 0));
+		lbThemnhanvien.setBackground(Color.WHITE);
+		lbThemnhanvien.setFont(new Font("Segoe UI", Font.BOLD, 34));
 		lbThemnhanvien.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbThemnhanvien.setHorizontalAlignment(SwingConstants.CENTER);
 		lbThemnhanvien.setBounds(10, 11, 846, 62);
 		panel.add(lbThemnhanvien);
 		
-		JLabel lblTnNhnVin = new JLabel("T\u00EAn nh\u00E2n vi\u00EAn");
-		lblTnNhnVin.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblTnNhnVin.setBounds(10, 110, 176, 22);
+		JLabel lblTnNhnVin = new JLabel("Tên nhân viên: ");
+		lblTnNhnVin.setForeground(new Color(204, 0, 0));
+		lblTnNhnVin.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblTnNhnVin.setBounds(40, 116, 176, 30);
 		panel.add(lblTnNhnVin);
 		
 		tfTennhanvien = new JTextField();
-		tfTennhanvien.setBounds(10, 143, 566, 41);
+		tfTennhanvien.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		tfTennhanvien.setBounds(40, 145, 566, 41);
 		panel.add(tfTennhanvien);
 		tfTennhanvien.setColumns(10);
 		
-		JLabel lblSinThoi = new JLabel("S\u1ED1 \u0111i\u1EC7n tho\u1EA1i");
-		lblSinThoi.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblSinThoi.setBounds(10, 206, 176, 22);
+		JLabel lblSinThoi = new JLabel("Số điện thoại:");
+		lblSinThoi.setForeground(new Color(204, 0, 0));
+		lblSinThoi.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblSinThoi.setBounds(40, 223, 176, 30);
 		panel.add(lblSinThoi);
 		
 		tfSodienthoai = new JTextField();
-		tfSodienthoai.setBounds(10, 249, 566, 41);
+		tfSodienthoai.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		tfSodienthoai.setBounds(40, 253, 566, 41);
 		panel.add(tfSodienthoai);
 		tfSodienthoai.setColumns(10);
 		
-		JLabel lblTnngNhp = new JLabel("T\u00EAn \u0111\u0103ng nh\u1EADp");
-		lblTnngNhp.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblTnngNhp.setBounds(10, 315, 146, 22);
+		JLabel lblTnngNhp = new JLabel("Tên đăng nhập:");
+		lblTnngNhp.setForeground(new Color(204, 0, 0));
+		lblTnngNhp.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblTnngNhp.setBounds(40, 316, 176, 34);
 		panel.add(lblTnngNhp);
 		
 		tfUsername = new JTextField();
-		tfUsername.setBounds(12, 348, 564, 41);
+		tfUsername.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		tfUsername.setBounds(42, 350, 564, 41);
 		panel.add(tfUsername);
 		tfUsername.setColumns(10);
 		
-		JLabel lblMtKhu = new JLabel("M\u1EADt kh\u1EA9u");
-		lblMtKhu.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMtKhu.setBounds(10, 415, 146, 22);
+		JLabel lblMtKhu = new JLabel("Mật khẩu:");
+		lblMtKhu.setForeground(new Color(204, 0, 0));
+		lblMtKhu.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblMtKhu.setBounds(40, 426, 146, 31);
 		panel.add(lblMtKhu);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(10, 459, 566, 41);
+		passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		passwordField.setBounds(40, 459, 566, 41);
 		panel.add(passwordField);
 		
-		JLabel lblNhpLiMt = new JLabel("Nh\u1EADp l\u1EA1i m\u1EADt kh\u1EA9u");
-		lblNhpLiMt.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNhpLiMt.setBounds(10, 525, 146, 22);
+		JLabel lblNhpLiMt = new JLabel("Nhập lại mật khẩu:");
+		lblNhpLiMt.setForeground(new Color(204, 0, 0));
+		lblNhpLiMt.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblNhpLiMt.setBounds(40, 537, 186, 32);
 		panel.add(lblNhpLiMt);
 		
 		repasswordField = new JPasswordField();
-		repasswordField.setBounds(10, 570, 566, 41);
+		repasswordField.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		repasswordField.setBounds(40, 570, 566, 41);
 		panel.add(repasswordField);
 		
 		JButton btnThem = new JButton("Th\u00EAm");
+		btnThem.setBackground(new Color(204, 0, 0));
+		btnThem.setForeground(Color.WHITE);
+		btnThem.setFont(new Font("Segoe UI", Font.BOLD, 28));
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createNhanvien();
@@ -132,7 +150,10 @@ public class ThemNhanVienDialog extends JDialog {
 		btnThem.setBounds(639, 143, 186, 126);
 		panel.add(btnThem);
 		
-		JButton btnXoa = new JButton("clear");
+		JButton btnXoa = new JButton("Xóa");
+		btnXoa.setBackground(new Color(204, 0, 0));
+		btnXoa.setForeground(Color.WHITE);
+		btnXoa.setFont(new Font("Segoe UI", Font.BOLD, 28));
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tfTennhanvien.setText("");
@@ -145,7 +166,10 @@ public class ThemNhanVienDialog extends JDialog {
 		btnXoa.setBounds(639, 294, 186, 126);
 		panel.add(btnXoa);
 		
-		JButton btnExit = new JButton("close");
+		JButton btnExit = new JButton("Đóng");
+		btnExit.setBackground(new Color(204, 0, 0));
+		btnExit.setForeground(Color.WHITE);
+		btnExit.setFont(new Font("Segoe UI", Font.BOLD, 28));
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

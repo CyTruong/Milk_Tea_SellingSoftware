@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ThemToppingDialog extends JDialog {
 	private JTextField tften;
@@ -38,62 +39,78 @@ public class ThemToppingDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public ThemToppingDialog() {
+		getContentPane().setBackground(new Color(244,164,96));
 		setBounds(100, 100, 593, 432);
 		getContentPane().setLayout(null);
 		
 		JLabel lblThmTopping = new JLabel("Th\u00EAm topping");
+		lblThmTopping.setForeground(new Color(204, 0, 0));
+		lblThmTopping.setBackground(Color.WHITE);
 		lblThmTopping.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblThmTopping.setHorizontalAlignment(SwingConstants.CENTER);
-		lblThmTopping.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
+		lblThmTopping.setFont(new Font("Segoe UI", Font.BOLD, 34));
 		lblThmTopping.setBounds(10, 11, 538, 62);
 		getContentPane().add(lblThmTopping);
 		
-		JLabel lblTnTopping = new JLabel("T\u00EAn topping");
-		lblTnTopping.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblTnTopping.setBounds(20, 85, 176, 22);
+		JLabel lblTnTopping = new JLabel("T√™n topping:");
+		lblTnTopping.setForeground(new Color(204, 0, 0));
+		lblTnTopping.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblTnTopping.setBounds(30, 97, 176, 30);
 		getContentPane().add(lblTnTopping);
 		
 		tften = new JTextField();
+		tften.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		tften.setColumns(10);
 		tften.setBounds(30, 128, 501, 37);
 		getContentPane().add(tften);
 		
-		JLabel lblGi = new JLabel("Gi\u00E1");
-		lblGi.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblGi.setBounds(221, 201, 49, 22);
+		JLabel lblGi = new JLabel("Gi√°: ");
+		lblGi.setForeground(new Color(204, 0, 0));
+		lblGi.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblGi.setBounds(219, 201, 49, 22);
 		getContentPane().add(lblGi);
 		
 		tfgia = new JTextField();
+		tfgia.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		tfgia.setColumns(10);
-		tfgia.setBounds(280, 186, 251, 37);
+		tfgia.setBounds(262, 198, 269, 37);
 		getContentPane().add(tfgia);
 		
-		JButton btthem = new JButton("ThÍm");
+		JButton btthem = new JButton("Th√™m");
+		btthem.setBackground(new Color(204, 0, 0));
+		btthem.setForeground(Color.WHITE);
+		btthem.setFont(new Font("Segoe UI", Font.BOLD, 28));
 		btthem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				creatnew();
 			}
 		});
-		btthem.setBounds(22, 267, 159, 119);
+		btthem.setBounds(40, 267, 151, 105);
 		getContentPane().add(btthem);
 		
-		JButton btclear = new JButton("clear");
+		JButton btclear = new JButton("X√≥a");
+		btclear.setBackground(new Color(204, 0, 0));
+		btclear.setFont(new Font("Segoe UI", Font.BOLD, 28));
+		btclear.setForeground(Color.WHITE);
 		btclear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tfgia.setText("");
 				tften.setText("");
 			}
 		});
-		btclear.setBounds(205, 265, 171, 122);
+		btclear.setBounds(203, 266, 157, 107);
 		getContentPane().add(btclear);
 		
-		JButton btclose = new JButton("close");
+		JButton btclose = new JButton("ƒê√≥ng");
+		btclose.setBackground(new Color(204, 0, 0));
+		btclose.setFont(new Font("Segoe UI", Font.BOLD, 28));
+		btclose.setForeground(Color.WHITE);
 		btclose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btclose.setBounds(396, 264, 171, 125);
+		btclose.setBounds(372, 265, 159, 108);
 		getContentPane().add(btclose);
 	}
 	private void creatnew() {
@@ -106,7 +123,7 @@ public class ThemToppingDialog extends JDialog {
             	QLTS_DatabaseControler.getInstance().getProcedures().insertTopping(tften.getText(), giatien);
             }
         }.start();
-        ToastMessage toast = new ToastMessage("ThÍm topping th‡nh cÙng", 3000);
+        ToastMessage toast = new ToastMessage("ThÔøΩm topping thÔøΩnh cÔøΩng", 3000);
         toast.setVisible(true);
         dispose();
 	}

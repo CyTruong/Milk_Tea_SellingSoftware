@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ThemLoaiDoUongDialog extends JDialog {
 
@@ -39,58 +40,72 @@ public class ThemLoaiDoUongDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public ThemLoaiDoUongDialog() {
+		getContentPane().setBackground(new Color(255, 164, 96));
 		setUndecorated(true);
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 660, 384);
 		getContentPane().setLayout(null);
+		contentPanel.setBackground(new Color(244, 164, 96));
 		contentPanel.setBounds(0, 0, 651, 409);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
 		{
 			JLabel lblThmLoi = new JLabel("Th\u00EAm lo\u1EA1i \u0111\u1ED3 u\u1ED1ng");
+			lblThmLoi.setForeground(new Color(204, 0, 0));
 			lblThmLoi.setBounds(10, 10, 631, 37);
 			lblThmLoi.setHorizontalTextPosition(SwingConstants.CENTER);
 			lblThmLoi.setHorizontalAlignment(SwingConstants.CENTER);
-			lblThmLoi.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
+			lblThmLoi.setFont(new Font("Segoe UI", Font.BOLD, 34));
 			contentPanel.add(lblThmLoi);
 		}
 		{
 			JLabel lblTnLoi = new JLabel("Tên loại đồ uống");
-			lblTnLoi.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblTnLoi.setBounds(10, 75, 176, 22);
+			lblTnLoi.setForeground(new Color(204, 0, 0));
+			lblTnLoi.setFont(new Font("Segoe UI", Font.BOLD, 20));
+			lblTnLoi.setBounds(10, 75, 176, 32);
 			contentPanel.add(lblTnLoi);
 		}
 		{
 			textField = new JTextField();
+			textField.setFont(new Font("Segoe UI", Font.BOLD, 18));
 			textField.setColumns(10);
 			textField.setBounds(10, 120, 614, 41);
 			contentPanel.add(textField);
 		}
 		{
-			JButton button = new JButton("close");
-			button.addActionListener(new ActionListener() {
+			JButton btnng = new JButton("Đóng");
+			btnng.setBackground(new Color(204,0 , 0));
+			btnng.setFont(new Font("Segoe UI", Font.BOLD, 28));
+			btnng.setForeground(Color.WHITE);
+			btnng.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					dispose();
 				}
 			});
-			button.setBounds(438, 185, 186, 133);
-			contentPanel.add(button);
+			btnng.setBounds(438, 185, 186, 133);
+			contentPanel.add(btnng);
 		}
 		{
-			JButton button = new JButton("clear");
-			button.addActionListener(new ActionListener() {
+			JButton btnXa = new JButton("Xóa");
+			btnXa.setBackground(new Color(204,0, 0));
+			btnXa.setFont(new Font("Segoe UI", Font.BOLD, 28));
+			btnXa.setForeground(Color.WHITE);
+			btnXa.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					textField.setText("");
 				}
 			});
-			button.setBounds(238, 188, 186, 133);
-			contentPanel.add(button);
+			btnXa.setBounds(238, 188, 186, 133);
+			contentPanel.add(btnXa);
 		}
 		{
 			JButton button = new JButton("Thêm");
+			button.setBackground(new Color(204, 0, 0));
+			button.setForeground(Color.WHITE);
+			button.setFont(new Font("Segoe UI", Font.BOLD, 28));
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					creatnewLoaidouong();
